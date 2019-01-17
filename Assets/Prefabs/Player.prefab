@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 212170396938953208}
   - component: {fileID: 95780000037645644}
   - component: {fileID: 50296831879454348}
-  - component: {fileID: 114060000125479136}
   - component: {fileID: 61163675888365544}
   - component: {fileID: 114460792729703742}
+  - component: {fileID: 114699779448338578}
+  - component: {fileID: 58772429160326716}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -130,19 +131,34 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 1
   m_AngularDrag: 1
-  m_GravityScale: 3
+  m_GravityScale: 6
   m_Material: {fileID: 6200000, guid: ad4f5cb41c3381342a7e5a1af83e1553, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!58 &58772429160326716
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1095344846554854}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: ad4f5cb41c3381342a7e5a1af83e1553, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.019816786, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.36920896
 --- !u!61 &61163675888365544
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1095344846554854}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -186,20 +202,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114060000125479136
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1095344846554854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5707c717bfb8ed6488a40c8254a9138b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _movespeed: 150
-  _maxMoveSpeed: 8
-  _jumpForce: 18
 --- !u!114 &114460792729703742
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -209,6 +211,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e4d680a67c9ba241a4dca3062b258cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114699779448338578
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1095344846554854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5707c717bfb8ed6488a40c8254a9138b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212170396938953208

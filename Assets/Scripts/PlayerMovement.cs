@@ -1,111 +1,111 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float _movespeed = 5.0f;
-    [SerializeField] private float _maxMoveSpeed = 15.0f;
-
-    [SerializeField] private float _jumpForce = 5.0f;
-    private Rigidbody2D _rigid;
     private PlayerCollisions _collisions;
+    private Rigidbody2D _rb;
+    private float _movespeed = 10.0f;
+    private float _jumpforce = 15.0f;
 
-    private bool _isGrounded = false;
-
+    private float _horzAxis = 0;
+    private float _vertAxis = 0;
     private bool _doJump = false;
-    private float _horzAxis = 0.0f;
-    private float _maxSlideSpeed = 5.0f;
-    private float _maxUpSpeed = 25.0f;
+    private bool _canJump = false;
+    private float _gravityScale = 0;
+
+    private float _dashTimer = 0.0f;
+    private float _dashCooldown = 0.1f;
+
+    private float _jumpCooldown = 0.1f;
+    private bool _IsGrounded = false;
+
+    private float _dashSpeed = 50.0f;
+    private float _dashDirX = 1;
+    private float _dashDirY = 1;
+    private bool _IsDashing = false;
 
     private void Start()
     {
+        _rb = GetComponent<Rigidbody2D>();
+        _gravityScale = _rb.gravityScale;
         _collisions = GetComponent<PlayerCollisions>();
-        _rigid = GetComponent<Rigidbody2D>();
 
     }
 
     private void Update()
     {
-        CheckGrounded();
-
         _horzAxis = Input.GetAxis("Horizontal");
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        _vertAxis = Input.GetAxis("Vertical");
+        if (Input.GetKeyDown(KeyCode.Space)
+        && _canJump)
         {
             _doJump = true;
+            StartCoroutine(JumpCooldown());
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            _dashDirX = _horzAxis > 0 ? 1.0f : -1.0f ;
+            _dashDirY = 0.0f;
+
+
+            _IsDashing = true;
+            StartCoroutine(DashCooldown());
         }
 
     }
 
     private void FixedUpdate()
     {
-        ClampMovespeed();
+        CheckCollisions();
         HandleMovement();
-        HandleWallSlide();
-        HandleJumping();
+        HandleJump();
     }
 
-    void ClampMovespeed()
+    private void HandleMovement()
     {
-        //clamp the speed
-        if (Mathf.Abs(_rigid.velocity.x) > _maxMoveSpeed)
+        if (!_IsDashing)
         {
-            _rigid.velocity = new Vector2(_maxMoveSpeed * Mathf.Sign(_rigid.velocity.x), _rigid.velocity.y);
+            _rb.velocity = new Vector2(_horzAxis * _movespeed, _rb.velocity.y);
         }
-
-        //set velocity to zero if the player is on the ground and is not moving the stick
-        if ((_collisions.Down && Mathf.Approximately(_horzAxis, 0.0f))) _rigid.velocity = new Vector2(0, _rigid.velocity.y);
-
-        //clamp the up speed
-        if (_rigid.velocity.y > _maxUpSpeed) _rigid.velocity = new Vector2(_rigid.velocity.x, _maxUpSpeed);
+        else
+        {
+            _rb.velocity = new Vector2(_dashDirX * _dashSpeed, _rb.velocity.y);
+        }
     }
 
-
-    void HandleMovement()
-    {
-        //_rigid.velocity += new Vector2(_horzAxis * _maxMoveSpeed, 0.0f);
-        _rigid.AddForce(new Vector2(_horzAxis * _movespeed, 0.0f), ForceMode2D.Force);
-    }
-
-    void HandleJumping()
+    private void HandleJump()
     {
         if (_doJump)
         {
-            _doJump = false;
-
-            if (_isGrounded)
-            {
-                _rigid.velocity = new Vector2(_rigid.velocity.x, 0.0f);
-                _rigid.AddForce(new Vector2(0, _jumpForce), ForceMode2D.Impulse);
-            }
-            else if (_collisions.Right && !_collisions.Down)
-            {
-                _rigid.velocity = new Vector2(_rigid.velocity.x, 0.0f);
-                _rigid.AddForce(new Vector2(-_jumpForce * 4, _jumpForce), ForceMode2D.Impulse);
-            }
-            else if (_collisions.Left && !_collisions.Down)
-            {
-                _rigid.velocity = new Vector2(_rigid.velocity.x, 0.0f);
-                _rigid.AddForce(new Vector2(_jumpForce * 4, _jumpForce), ForceMode2D.Impulse);
-            }
+            _rb.velocity = new Vector2(_rb.velocity.x, _jumpforce);
         }
     }
 
-    void CheckGrounded()
+    private void CheckCollisions()
     {
-        if (_collisions.Down) _isGrounded = true;
-        else _isGrounded = false;
-    }
+        if (_collisions.Down) _canJump = true;
+        else _canJump = false;
 
-    void HandleWallSlide()
-    {
-        if ((_collisions.Left || _collisions.Right) && !_collisions.Down)
+        if ((_collisions.Right || _collisions.Left))
         {
-            if (_rigid.velocity.y < -_maxSlideSpeed)
-            {
-                _rigid.velocity = new Vector2(_rigid.velocity.x, -_maxSlideSpeed);
-            }
+            //climb
         }
+    }
+
+    private IEnumerator JumpCooldown()
+    {
+        yield return new WaitForSeconds(_jumpCooldown);
+        _doJump = false;
+    }
+
+    private IEnumerator DashCooldown()
+    {
+        yield return new WaitForSeconds(_dashCooldown);
+        _IsDashing = false;
     }
 }
