@@ -28,6 +28,11 @@ public class PlayerMovement : MonoBehaviour
     private float _dashDirY = 1;
     private bool _IsDashing = false;
 
+    private bool _canWallJump = true;
+    private bool _TouchingWall = false;
+    private bool _doWallJump = false;
+    private int _wallJumpDir = 1;
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -40,16 +45,27 @@ public class PlayerMovement : MonoBehaviour
     {
         _horzAxis = Input.GetAxis("Horizontal");
         _vertAxis = Input.GetAxis("Vertical");
+
         if (Input.GetKeyDown(KeyCode.Space)
-        && _canJump)
+        && _canJump
+        && !_TouchingWall)
         {
             _doJump = true;
             StartCoroutine(JumpCooldown());
         }
+        else if(Input.GetKeyDown(KeyCode.Space)
+            && _TouchingWall
+            && !_doWallJump)
+        {
+            if (_collisions.Right) _wallJumpDir = -1;
+            else _wallJumpDir = 1;
 
+            _doWallJump = true;
+            StartCoroutine(WallJumpCooldown());
+        }
         if (Input.GetMouseButtonDown(1))
         {
-            _dashDirX = _horzAxis > 0 ? 1.0f : -1.0f ;
+            _dashDirX = _horzAxis > 0 ? 1.0f : -1.0f;
             _dashDirY = 0.0f;
 
 
@@ -84,6 +100,11 @@ public class PlayerMovement : MonoBehaviour
         {
             _rb.velocity = new Vector2(_rb.velocity.x, _jumpforce);
         }
+
+        if (_doWallJump)
+        {
+            _rb.velocity = new Vector2(_jumpforce * _wallJumpDir, _jumpforce);
+        }
     }
 
     private void CheckCollisions()
@@ -93,8 +114,11 @@ public class PlayerMovement : MonoBehaviour
 
         if ((_collisions.Right || _collisions.Left))
         {
-            //climb
+            _rb.velocity = new Vector2(_rb.velocity.x, 0.0f);
+            _TouchingWall = true;
         }
+        else _TouchingWall = false;
+
     }
 
     private IEnumerator JumpCooldown()
@@ -107,5 +131,11 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(_dashCooldown);
         _IsDashing = false;
+    }
+
+    private IEnumerator WallJumpCooldown()
+    {
+        yield return new WaitForSeconds(_jumpCooldown);
+        _doWallJump = false;
     }
 }

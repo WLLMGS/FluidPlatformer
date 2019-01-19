@@ -16,15 +16,25 @@ public class EditorPlayButton : MonoBehaviour
 
     private void SpawnPlayer()
     {
-        Debug.Log("Player spawned");
-        //check if there is a player start
-        var beginning = GameObject.FindGameObjectWithTag("LevelBegin");
-        //if there is not player start return null
-        if (beginning == null) return;
-        //instantiate the player at the player start location
-        var p = Instantiate(_player, beginning.transform.position, Quaternion.identity);
-        //disable the editor camera
-        _editorCamera.SetActive(false);
+        if(!IsPlayerAlreadySpawned())
+        {
+            Debug.Log("Player spawned");
+            //check if there is a player start
+            var beginning = GameObject.FindGameObjectWithTag("LevelBegin");
+            //if there is not player start return null
+            if (beginning == null) return;
+            //instantiate the player at the player start location
+            var p = Instantiate(_player, beginning.transform.position, Quaternion.identity);
+            //disable the editor camera
+            _editorCamera.SetActive(false);
+        }
+       
+    }
 
+    bool IsPlayerAlreadySpawned()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        return (player != null);
     }
 }
