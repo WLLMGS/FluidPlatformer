@@ -10,13 +10,13 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rb;
     private float _movespeed = 10.0f;
     private float _jumpforce = 15.0f;
+    private float _wallJumpForce = 20.0f;
 
     private float _horzAxis = 0;
     private float _vertAxis = 0;
     private bool _doJump = false;
     private bool _canJump = false;
     private float _gravityScale = 0;
-
     private float _dashTimer = 0.0f;
     private float _dashCooldown = 0.1f;
 
@@ -48,14 +48,15 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space)
         && _canJump
-        && !_TouchingWall)
+        && _collisions.Down)
         {
             _doJump = true;
             StartCoroutine(JumpCooldown());
         }
         else if(Input.GetKeyDown(KeyCode.Space)
             && _TouchingWall
-            && !_doWallJump)
+            && !_doWallJump
+            && !_collisions.Down)
         {
             if (_collisions.Right) _wallJumpDir = -1;
             else _wallJumpDir = 1;
@@ -63,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
             _doWallJump = true;
             StartCoroutine(WallJumpCooldown());
         }
+
         if (Input.GetMouseButtonDown(1))
         {
             _dashDirX = _horzAxis > 0 ? 1.0f : -1.0f;
@@ -103,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (_doWallJump)
         {
-            _rb.velocity = new Vector2(_jumpforce * _wallJumpDir, _jumpforce);
+            _rb.velocity = new Vector2(_wallJumpForce * _wallJumpDir, _wallJumpForce);
         }
     }
 

@@ -31,7 +31,7 @@ public class EditorCameraMovement : MonoBehaviour
         float mouseScroll = -Input.GetAxis("Mouse ScrollWheel") * _scrollSpeed;
         float newSize = _camera.orthographicSize + mouseScroll;
 
-        newSize = Mathf.Clamp(newSize, 1.0f, 15.0f);
+        newSize = Mathf.Clamp(newSize, 1.0f, 20.0f);
 
         _camera.orthographicSize = newSize;
     }
