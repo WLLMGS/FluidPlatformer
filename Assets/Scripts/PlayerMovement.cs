@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
 {
     private PlayerCollisions _collisions;
     private Rigidbody2D _rb;
+    private PlayerAnimation _anim;
+
     private float _movespeed = 10.0f;
     private float _jumpforce = 15.0f;
     private float _wallJumpForce = 20.0f;
@@ -33,12 +35,21 @@ public class PlayerMovement : MonoBehaviour
     private bool _doWallJump = false;
     private int _wallJumpDir = 1;
 
+
+    public bool IsDashing
+    {
+        get { return _IsDashing; }
+    }
+    public bool DoJump
+    {
+        get { return _doJump; }
+    }
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _gravityScale = _rb.gravityScale;
         _collisions = GetComponent<PlayerCollisions>();
-
+        _anim = GetComponent<PlayerAnimation>();
     }
 
     private void Update()
@@ -70,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
             _dashDirX = _horzAxis > 0 ? 1.0f : -1.0f;
             _dashDirY = 0.0f;
 
+            _anim.DoDash = true;
 
             _IsDashing = true;
             StartCoroutine(DashCooldown());
