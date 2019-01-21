@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public enum EntityID
 {
@@ -13,21 +13,26 @@ public enum EntityID
 
 public class MapSaver : MonoBehaviour
 {
-
+    [SerializeField] private Text _filename;
     //1. get all blocks
     //2. get begin and finish
     //3. later -> get traps and enemies
 
-    void Update()
+    public void SaveLevel()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        string path;
+        //get path
+        if(_filename.text == null || _filename.text == "")
         {
-            SaveLevel();
+            path = "Levels/demoLevel.bin";
         }
-    }
+        else
+        {
+            path = "Levels/" + _filename.text + ".bin";
+        }
 
-    void SaveLevel()
-    {
+        Debug.Log(path);
+
         //get all objects with block tag
         GameObject[] blocks = GameObject.FindGameObjectsWithTag("Block");
         Debug.Log(blocks.Length);
@@ -39,7 +44,7 @@ public class MapSaver : MonoBehaviour
         GameObject[] finished = GameObject.FindGameObjectsWithTag("Finish");
 
         //open binary writer
-        BinaryWriter writer = new BinaryWriter(File.Create("Levels/testLevel.bin"));
+        BinaryWriter writer = new BinaryWriter(File.Create(path));
 
         //writer amount of entities to writer
         int totAmount = blocks.Length + beginnings.Length + finished.Length;

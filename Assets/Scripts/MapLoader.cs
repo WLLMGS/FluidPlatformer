@@ -17,7 +17,7 @@ public class MapLoader : MonoBehaviour
         _levelParent = new GameObject("Level");
 
         //open file
-        BinaryReader reader = new BinaryReader(File.OpenRead("Levels/testLevel.bin"));
+        BinaryReader reader = new BinaryReader(File.OpenRead("Levels/levelVideo.bin"));
 
         //get amount of entities in level
         int amountOfEntities = reader.ReadInt32();

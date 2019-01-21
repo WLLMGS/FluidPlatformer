@@ -155,4 +155,9 @@ public class AutoTilingScript : MonoBehaviour
             }
         }
     }
+
+    private void OnDestroy()
+    {
+        UpdateSurroundings();
+    }
 }
