@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainLevelMenuManager : MonoBehaviour {
 
@@ -35,4 +36,20 @@ public class MainLevelMenuManager : MonoBehaviour {
         _menu.SetActive(false);
     }
 
+    //BUTTON FUNCTIONS
+    public void ResumeButton()
+    {
+        UnPause();
+    }
+
+    public void MapEditorButton()
+    {
+        UnPause();
+        SceneManager.LoadScene(0);
+    }
+
+    public void QuitButton()
+    {
+        Application.Quit();
+    }
 }
