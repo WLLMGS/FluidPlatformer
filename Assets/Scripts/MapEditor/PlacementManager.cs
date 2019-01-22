@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum PlacementMode
 {
@@ -28,8 +29,13 @@ public class PlacementManager : MonoBehaviour
     [SerializeField] private Transform _editorMouse;
     [SerializeField] private List<GameObject> _placeableObjects = new List<GameObject>();
     [SerializeField] private GameObject _deletionBlock = null;
+    [SerializeField] private Text _filenameSave;
+    [SerializeField] private Text _filenameLoad;
 
     private List<GameObject> currentSelected = new List<GameObject>();
+    private GameObject _levelParent;
+    private MapSaver _mapSaver;
+    private MapLoader _mapLoader;
 
     private PlacementMode _placementMode = PlacementMode.Add;
 
@@ -40,9 +46,14 @@ public class PlacementManager : MonoBehaviour
     private int _BrushSize = 3;
     private int _selectedID = 0;
 
+
+
     private void Start()
     {
+        _levelParent = new GameObject("Level");
         var ui = EditorUIManager.Instance;
+        _mapSaver = GetComponent<MapSaver>();
+        _mapLoader = GetComponent<MapLoader>();
 
         for (int i = 0; i < _placeableObjects.Count; ++i)
         {
@@ -91,6 +102,7 @@ public class PlacementManager : MonoBehaviour
             {
                 var obj = Instantiate(block, block.transform.position + new Vector3(0,0,1), Quaternion.identity);
                 obj.GetComponent<Collider2D>().enabled = true;
+                obj.transform.parent = _levelParent.transform;
             }
 
         }
@@ -114,6 +126,11 @@ public class PlacementManager : MonoBehaviour
 
             //remove the block the user is hovering over
             RemoveUnderlyingBlocks();
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            DetachCurrentSelectedBlocks();
         }
     }
 
@@ -279,6 +296,50 @@ public class PlacementManager : MonoBehaviour
     public Sprite GetSpriteFromIndex(int index)
     {
         return _placeableObjects[index].GetComponent<SpriteRenderer>().sprite;
+    }
+
+    public void ClearLevel()
+    {
+        foreach(Transform child in _levelParent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    public void SaveFile()
+    {
+        string path;
+
+        if (_filenameSave.text == "" || _filenameSave.text == null)
+        {
+            path = "Levels/unnamedLevel.bin";
+        }
+        else
+        {
+            path = "Levels/" + _filenameSave.text + ".bin";
+        }
+
+        _mapSaver.SaveLevel(path);
+    }
+
+    public void LoadFile()
+    {
+        //first clear all current blocks
+        ClearLevel();
+
+        //get filename
+        string path;
+
+        if(_filenameLoad.text == "" || _filenameLoad.text == null)
+        {
+            path = "Levels/levelVideo.bin";
+        }
+        else
+        {
+            path = "Levels/" + _filenameLoad.text + ".bin";
+        }
+
+        _mapLoader.LoadLevel(path, _levelParent.transform);
     }
 }
 

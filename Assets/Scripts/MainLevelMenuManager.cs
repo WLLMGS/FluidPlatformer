@@ -48,6 +48,11 @@ public class MainLevelMenuManager : MonoBehaviour {
         SceneManager.LoadScene(0);
     }
 
+    public void MainGameButton()
+    {
+        UnPause();
+        SceneManager.LoadScene(1);
+    }
     public void QuitButton()
     {
         Application.Quit();

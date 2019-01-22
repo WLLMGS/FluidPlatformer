@@ -13,24 +13,12 @@ public enum EntityID
 
 public class MapSaver : MonoBehaviour
 {
-    [SerializeField] private Text _filename;
     //1. get all blocks
     //2. get begin and finish
     //3. later -> get traps and enemies
 
-    public void SaveLevel()
+    public void SaveLevel(string path)
     {
-        string path;
-        //get path
-        if(_filename.text == null || _filename.text == "")
-        {
-            path = "Levels/demoLevel.bin";
-        }
-        else
-        {
-            path = "Levels/" + _filename.text + ".bin";
-        }
-
         Debug.Log(path);
 
         //get all objects with block tag
