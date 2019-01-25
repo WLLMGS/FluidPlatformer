@@ -6,6 +6,10 @@ TagManager:
   tags:
   - LevelBegin
   - Block
+  - Grass
+  - Sawblade
+  - Torch
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -15,7 +19,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - NoPlayerCollision
   - 
   - 
   - 

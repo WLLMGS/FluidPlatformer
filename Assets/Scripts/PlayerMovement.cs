@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     private float _dashCooldown = 0.1f;
 
     private float _jumpCooldown = 0.1f;
+    private float _wallJumpCooldown = 0.1f;
+    
     private bool _IsGrounded = false;
 
     private float _dashSpeed = 50.0f;
@@ -128,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
 
         if ((_collisions.Right || _collisions.Left))
         {
-            _rb.velocity = new Vector2(_rb.velocity.x, 0.0f);
+            _rb.velocity = new Vector2(_rb.velocity.x, -2.0f);
             _TouchingWall = true;
         }
         else _TouchingWall = false;
@@ -149,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator WallJumpCooldown()
     {
-        yield return new WaitForSeconds(_jumpCooldown);
+        yield return new WaitForSeconds(_wallJumpCooldown);
         _doWallJump = false;
     }
 }

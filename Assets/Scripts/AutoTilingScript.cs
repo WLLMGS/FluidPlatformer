@@ -16,7 +16,7 @@ public class AutoTilingScript : MonoBehaviour
     {
         _renderer = GetComponent<SpriteRenderer>();
 
-       if(_renderer) CheckSurroundings();
+        if (_renderer) CheckSurroundings();
         UpdateSurroundings();
     }
 
@@ -25,16 +25,23 @@ public class AutoTilingScript : MonoBehaviour
     {
         _renderer = GetComponent<SpriteRenderer>();
 
-        RaycastHit2D hitUp = Physics2D.Raycast(transform.position + new Vector3(0, 1, 0), Vector2.zero);
-        RaycastHit2D hitRight = Physics2D.Raycast(transform.position + new Vector3(1, 0, 0), Vector2.zero);
-        RaycastHit2D hitDown = Physics2D.Raycast(transform.position + new Vector3(0, -1, 0), Vector2.zero);
-        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position + new Vector3(-1, 0, 0), Vector2.zero);
+        RaycastHit2D RaycastHitUp = Physics2D.Raycast(transform.position + new Vector3(0, 1, 0), Vector2.zero);
+        RaycastHit2D RaycastHitRight = Physics2D.Raycast(transform.position + new Vector3(1, 0, 0), Vector2.zero);
+        RaycastHit2D RaycastHitDown = Physics2D.Raycast(transform.position + new Vector3(0, -1, 0), Vector2.zero);
+        RaycastHit2D RaycastHitLeft = Physics2D.Raycast(transform.position + new Vector3(-1, 0, 0), Vector2.zero);
+
+        bool hitUp = CheckRaycastHit(RaycastHitUp);
+        bool hitRight = CheckRaycastHit(RaycastHitRight);
+        bool hitDown = CheckRaycastHit(RaycastHitDown);
+        bool hitLeft = CheckRaycastHit(RaycastHitLeft);
 
         //top left
         if (!hitUp
             && hitDown
             && !hitLeft
-            && hitRight)
+            && hitRight
+
+            )
         {
             _renderer.flipX = false;
             _renderer.sprite = _TopCorner;
@@ -43,7 +50,8 @@ public class AutoTilingScript : MonoBehaviour
         else if (!hitUp
             && hitDown
             && hitLeft
-            && hitRight)
+            && hitRight
+           )
         {
 
             _renderer.flipX = false;
@@ -62,7 +70,8 @@ public class AutoTilingScript : MonoBehaviour
         else if (!hitLeft
                 && hitDown
                 && hitUp
-                && hitRight)
+                && hitRight
+                )
         {
             _renderer.flipX = false;
             _renderer.sprite = _SideMiddle;
@@ -71,25 +80,28 @@ public class AutoTilingScript : MonoBehaviour
         else if (!hitRight
                && hitDown
                && hitUp
-               && hitLeft)
+               && hitLeft
+               )
         {
             _renderer.flipX = true;
             _renderer.sprite = _SideMiddle;
         }
         //middle middle
-        else if(hitRight
+        else if (hitRight
             && hitLeft
             && hitDown
-            && hitUp)
+            && hitUp
+            )
         {
             _renderer.flipX = false;
             _renderer.sprite = _MiddleMiddle;
         }
         //bottom corner left
-        else if(hitRight
+        else if (hitRight
             && hitUp
             && !hitLeft
-            && !hitDown)
+            && !hitDown
+            )
         {
             _renderer.flipX = false;
             _renderer.sprite = _BottomCorner;
@@ -98,16 +110,18 @@ public class AutoTilingScript : MonoBehaviour
         else if (hitLeft
             && hitUp
             && !hitRight
-            && !hitDown)
+            && !hitDown
+            )
         {
             _renderer.flipX = true;
             _renderer.sprite = _BottomCorner;
         }
         //bottom center
-        else if(hitUp
+        else if (hitUp
             && hitLeft
             && hitRight
-            && !hitDown)
+            && !hitDown
+           )
         {
             _renderer.flipX = false;
             _renderer.sprite = _BottomMiddle;
@@ -121,7 +135,7 @@ public class AutoTilingScript : MonoBehaviour
         RaycastHit2D hitDown = Physics2D.Raycast(transform.position + new Vector3(0, -1, 0), Vector2.zero);
         RaycastHit2D hitLeft = Physics2D.Raycast(transform.position + new Vector3(-1, 0, 0), Vector2.zero);
 
-        if(hitUp)
+        if (hitUp)
         {
             AutoTilingScript scr = hitUp.collider.gameObject.GetComponent<AutoTilingScript>();
             if (scr)
@@ -129,7 +143,7 @@ public class AutoTilingScript : MonoBehaviour
                 scr.CheckSurroundings();
             }
         }
-         if(hitDown)
+        if (hitDown)
         {
             AutoTilingScript scr = hitDown.collider.gameObject.GetComponent<AutoTilingScript>();
             if (scr)
@@ -159,5 +173,14 @@ public class AutoTilingScript : MonoBehaviour
     private void OnDestroy()
     {
         UpdateSurroundings();
+    }
+
+    private bool CheckRaycastHit(RaycastHit2D hit)
+    {
+        if(hit)
+        {
+            return hit.collider.tag == "Block";
+        }
+        return false;
     }
 }

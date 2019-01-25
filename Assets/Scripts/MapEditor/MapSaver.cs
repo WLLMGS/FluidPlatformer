@@ -8,7 +8,11 @@ public enum EntityID
 {
     Block = 1,
     Beginning = 2,
-    Finish = 3
+    Finish = 3,
+    Grass = 4,
+    Sawtrap = 5,
+    Torch = 6,
+    Platform = 7
 }
 
 public class MapSaver : MonoBehaviour
@@ -25,6 +29,18 @@ public class MapSaver : MonoBehaviour
         GameObject[] blocks = GameObject.FindGameObjectsWithTag("Block");
         Debug.Log(blocks.Length);
 
+        //get grass blocks
+        GameObject[] grassBlocks = GameObject.FindGameObjectsWithTag("Grass");
+
+        //get saw traps
+        GameObject[] sawtraps = GameObject.FindGameObjectsWithTag("Sawblade");
+
+        //get torhces
+        GameObject[] torches = GameObject.FindGameObjectsWithTag("Torch");
+
+        //get platforms
+        GameObject[] platforms = GameObject.FindGameObjectsWithTag("Platform");
+
         //get beginning
         GameObject[] beginnings = GameObject.FindGameObjectsWithTag("LevelBegin");
 
@@ -35,7 +51,7 @@ public class MapSaver : MonoBehaviour
         BinaryWriter writer = new BinaryWriter(File.Create(path));
 
         //writer amount of entities to writer
-        int totAmount = blocks.Length + beginnings.Length + finished.Length;
+        int totAmount = blocks.Length + beginnings.Length + finished.Length + grassBlocks.Length + sawtraps.Length + torches.Length + platforms.Length;
         writer.Write(totAmount);
 
         //write all blocks to file
@@ -66,6 +82,50 @@ public class MapSaver : MonoBehaviour
             GameObject finish = finished[i];
             Vector3 pos = finish.transform.position;
             writer.Write((int)EntityID.Finish);
+            writer.Write(pos.x);
+            writer.Write(pos.y);
+            writer.Write(pos.z);
+        }
+        
+        //write all grass blocks to file
+        for(int i = 0; i < grassBlocks.Length; ++i)
+        {
+            GameObject grass = grassBlocks[i];
+            Vector3 pos = grass.transform.position;
+            writer.Write((int)EntityID.Grass);
+            writer.Write(pos.x);
+            writer.Write(pos.y);
+            writer.Write(pos.z);
+        }
+
+        //write all sawtraps to file
+        for (int i = 0; i < sawtraps.Length; ++i)
+        {
+            GameObject saw = sawtraps[i];
+            Vector3 pos = saw.transform.position;
+            writer.Write((int)EntityID.Sawtrap);
+            writer.Write(pos.x);
+            writer.Write(pos.y);
+            writer.Write(pos.z);
+        }
+
+        //write all torches to file
+        for (int i = 0; i < torches.Length; ++i)
+        {
+            GameObject torch = torches[i];
+            Vector3 pos = torch.transform.position;
+            writer.Write((int)EntityID.Torch);
+            writer.Write(pos.x);
+            writer.Write(pos.y);
+            writer.Write(pos.z);
+        }
+       
+        //write all platforms to file
+        for (int i = 0; i < platforms.Length; ++i)
+        {
+            GameObject platform = platforms[i];
+            Vector3 pos = platform.transform.position;
+            writer.Write((int)EntityID.Platform);
             writer.Write(pos.x);
             writer.Write(pos.y);
             writer.Write(pos.z);

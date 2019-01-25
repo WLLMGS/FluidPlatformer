@@ -9,6 +9,6 @@ public class CursorScript : MonoBehaviour
 
     private void Start()
     {
-        Cursor.SetCursor(_cursor, Vector2.zero, CursorMode.Auto);
+        //Cursor.SetCursor(_cursor, Vector2.zero, CursorMode.Auto);
     }
 }

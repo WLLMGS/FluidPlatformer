@@ -22,11 +22,11 @@ GameObject:
   - component: {fileID: 212170396938953208}
   - component: {fileID: 95780000037645644}
   - component: {fileID: 50296831879454348}
-  - component: {fileID: 61163675888365544}
   - component: {fileID: 114460792729703742}
   - component: {fileID: 114699779448338578}
   - component: {fileID: 58772429160326716}
   - component: {fileID: 114711131930566136}
+  - component: {fileID: 114153372765798652}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -58,7 +58,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1788945173220972}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4687612215242508}
@@ -72,7 +72,7 @@ Transform:
   m_GameObject: {fileID: 1095344846554854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.01, y: 1.35, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_Children:
   - {fileID: 4123650117358966}
   m_Father: {fileID: 0}
@@ -102,7 +102,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 15
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -150,34 +150,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.019816786, y: -0.19}
+  m_Offset: {x: -0.034478825, y: -0.20786858}
   serializedVersion: 2
-  m_Radius: 0.36920896
---- !u!61 &61163675888365544
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1095344846554854}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.0015957952, y: -0.090958}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.75, y: 1.125}
-    newSize: {x: 0.5, y: 0.5}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.7287222, y: 0.67765784}
-  m_EdgeRadius: 0
+  m_Radius: 0.37241563
 --- !u!81 &81201968821408388
 AudioListener:
   m_ObjectHideFlags: 1
@@ -203,6 +178,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114153372765798652
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1095344846554854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dffaf6053f351d4a94d2dcb75fa5738, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _landEffect: {fileID: 1384182666843248, guid: 3fa031c3d0c30e540a8f97db6e567375,
+    type: 2}
 --- !u!114 &114460792729703742
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -214,6 +202,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e4d680a67c9ba241a4dca3062b258cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tagsToIgnore:
+  - Grass
+  - LevelBegin
+  - Finish
+  - Sawblade
 --- !u!114 &114699779448338578
 MonoBehaviour:
   m_ObjectHideFlags: 1

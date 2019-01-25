@@ -24,7 +24,8 @@ public class EditorPlayButton : MonoBehaviour
             //if there is not player start return null
             if (beginning == null) return;
             //instantiate the player at the player start location
-            var p = Instantiate(_player, beginning.transform.position, Quaternion.identity);
+            Vector3 pos = new Vector3(beginning.transform.position.x, beginning.transform.position.y, 15);
+            var p = Instantiate(_player, pos, Quaternion.identity);
             //disable the editor camera
             _editorCamera.SetActive(false);
         }

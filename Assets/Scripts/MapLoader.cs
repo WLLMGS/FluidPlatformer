@@ -8,8 +8,10 @@ public class MapLoader : MonoBehaviour
     [SerializeField] private GameObject _block;
     [SerializeField] private GameObject _beginFlag;
     [SerializeField] private GameObject _finishFlag;
-
-
+    [SerializeField] private GameObject _grassBlock;
+    [SerializeField] private GameObject _sawtrap;
+    [SerializeField] private GameObject _torch;
+    [SerializeField] private GameObject _platform;
     public void LoadLevel(string filename, Transform parentObj)
     {
         //open file
@@ -46,6 +48,22 @@ public class MapLoader : MonoBehaviour
                 case EntityID.Finish:
                     var finish = Instantiate(_finishFlag, pos, Quaternion.identity);
                     finish.transform.parent = parentObj;
+                    break;
+                case EntityID.Grass:
+                    var grass = Instantiate(_grassBlock, pos, Quaternion.identity);
+                    grass.transform.parent = parentObj;
+                    break;
+                case EntityID.Sawtrap:
+                    var sawtrap = Instantiate(_sawtrap, pos, Quaternion.identity);
+                    sawtrap.transform.parent = parentObj;
+                    break;
+                case EntityID.Torch:
+                    var torch = Instantiate(_torch, pos, Quaternion.identity);
+                    torch.transform.parent = parentObj;
+                    break;
+                case EntityID.Platform:
+                    var platform = Instantiate(_platform, pos, Quaternion.identity);
+                    platform.transform.parent = parentObj;
                     break;
             }
 

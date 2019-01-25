@@ -95,12 +95,11 @@ public class PlacementManager : MonoBehaviour
             RemoveUnderlyingBlocks();
 
             //create the new block
-            //var obj = Instantiate(currentSelected, _editorMouse.transform.position, Quaternion.identity);
-            //obj.GetComponent<Collider2D>().enabled = true;
+            var blockdata = currentSelected[0].GetComponent<EditorBlockData>();
 
             foreach (GameObject block in currentSelected)
             {
-                var obj = Instantiate(block, block.transform.position + new Vector3(0,0,1), Quaternion.identity);
+                var obj = Instantiate(block, block.transform.position + new Vector3(0,0, blockdata.ZValue), Quaternion.identity);
                 obj.GetComponent<Collider2D>().enabled = true;
                 obj.transform.parent = _levelParent.transform;
             }
@@ -125,7 +124,7 @@ public class PlacementManager : MonoBehaviour
             StartCoroutine(PlacementCooldown());
 
             //remove the block the user is hovering over
-            RemoveUnderlyingBlocks();
+            DeleteUnderlyingBlocks();
         }
 
         if (Input.GetMouseButtonDown(1))
@@ -141,16 +140,38 @@ public class PlacementManager : MonoBehaviour
         //if there is a hit remove that object
         if (hit)
         {
-            Destroy(hit.collider.gameObject);
+           Destroy(hit.collider.gameObject);
         }
 
     }
 
     void RemoveUnderlyingBlocks()
     {
+        var currentData = currentSelected[0].GetComponent<EditorBlockData>();
+
+        //check if they're on the same layer
+        foreach (GameObject block in currentSelected)
+        {
+            RaycastHit2D[] hits = Physics2D.RaycastAll(block.transform.position, Vector2.zero);
+
+            foreach(var hit in hits)
+            {
+                if (hit)
+                {
+                    var data = hit.collider.GetComponent<EditorBlockData>();
+                    if (currentData.ZValue == data.ZValue) Destroy(hit.collider.gameObject);
+                }
+            }
+            
+        }
+    }
+
+    void DeleteUnderlyingBlocks()
+    {
         foreach (GameObject block in currentSelected)
         {
             RaycastHit2D hit = Physics2D.Raycast(block.transform.position, Vector2.zero);
+            
             if (hit)
             {
                 Destroy(hit.collider.gameObject);
@@ -295,7 +316,19 @@ public class PlacementManager : MonoBehaviour
 
     public Sprite GetSpriteFromIndex(int index)
     {
-        return _placeableObjects[index].GetComponent<SpriteRenderer>().sprite;
+        SpriteRenderer renderer;
+        Sprite sprite;
+
+        renderer = (_placeableObjects[index].GetComponent<SpriteRenderer>());
+
+        if (renderer != null) sprite = renderer.sprite;
+        else
+        {
+            sprite = _placeableObjects[index].GetComponentInChildren<SpriteRenderer>().sprite;
+        }
+
+        return sprite;
+       
     }
 
     public void ClearLevel()
@@ -312,11 +345,26 @@ public class PlacementManager : MonoBehaviour
 
         if (_filenameSave.text == "" || _filenameSave.text == null)
         {
-            path = "Levels/unnamedLevel.bin";
+            return;
         }
         else
         {
             path = "Levels/" + _filenameSave.text + ".bin";
+        }
+
+        EditorUIManager.Instance.LastEditedFile = _filenameSave.text;
+
+        _mapSaver.SaveLevel(path);
+    }
+
+    public void SaveCurrentOpenedFile()
+    {
+        string filename = EditorUIManager.Instance.LastEditedFile;
+        string path;
+        if (filename == "" || filename == null) return;
+        else
+        {
+            path = "Levels/" + filename + ".bin";
         }
 
         _mapSaver.SaveLevel(path);
@@ -332,12 +380,14 @@ public class PlacementManager : MonoBehaviour
 
         if(_filenameLoad.text == "" || _filenameLoad.text == null)
         {
-            path = "Levels/levelVideo.bin";
+            return;
         }
         else
         {
             path = "Levels/" + _filenameLoad.text + ".bin";
         }
+
+        EditorUIManager.Instance.LastEditedFile = _filenameLoad.text;
 
         _mapLoader.LoadLevel(path, _levelParent.transform);
     }

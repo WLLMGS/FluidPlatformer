@@ -56,6 +56,15 @@ public class EditorUIManager : MonoBehaviour
         _LoadPopUp.SetActive(false);
     }
 
+    //===== LAST SAVED / LOADED FILE
+    private string _LastEditedFile = "";
+
+    public string LastEditedFile
+    {
+        get { return _LastEditedFile; }
+        set { _LastEditedFile = value; }
+    }
+
     //===== START =====
     private void Start()
     {

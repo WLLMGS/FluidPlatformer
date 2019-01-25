@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4621468294953922}
   - component: {fileID: 212820787564187880}
   - component: {fileID: 61500226912917348}
+  - component: {fileID: 114607655663029694}
   m_Layer: 0
   m_Name: begin_flag
   m_TagString: LevelBegin
@@ -66,6 +67,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114607655663029694
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1231489958039864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f95fe7e05f3a2b04c97f0472bccce7ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ZValue: 6
 --- !u!212 &212820787564187880
 SpriteRenderer:
   m_ObjectHideFlags: 1

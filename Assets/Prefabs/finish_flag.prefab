@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212463237155964472}
   - component: {fileID: 61384746435466348}
   - component: {fileID: 114042052732317518}
+  - component: {fileID: 114904724169338492}
   m_Layer: 0
   m_Name: finish_flag
   m_TagString: Finish
@@ -78,6 +79,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc504f2fd293a54198fc8bdaeec6223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114904724169338492
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1160264578892394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f95fe7e05f3a2b04c97f0472bccce7ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ZValue: 6
 --- !u!212 &212463237155964472
 SpriteRenderer:
   m_ObjectHideFlags: 1
