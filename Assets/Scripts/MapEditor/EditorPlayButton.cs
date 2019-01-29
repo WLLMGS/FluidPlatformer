@@ -8,6 +8,8 @@ public class EditorPlayButton : MonoBehaviour
 
     [SerializeField] private GameObject _player;
     [SerializeField] private GameObject _editorCamera;
+    [SerializeField] private GameObject _followCamera;
+
     private void Start()
     {
         var button = GetComponent<Button>();
@@ -28,6 +30,9 @@ public class EditorPlayButton : MonoBehaviour
             var p = Instantiate(_player, pos, Quaternion.identity);
             //disable the editor camera
             _editorCamera.SetActive(false);
+
+            //spawn follow camera
+            Instantiate(_followCamera, pos, Quaternion.identity);
         }
        
     }

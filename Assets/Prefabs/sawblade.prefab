@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 212646852551943550}
   - component: {fileID: 61939091735015878}
   - component: {fileID: 114480805692980080}
-  - component: {fileID: 114717060085650926}
   m_Layer: 0
   m_Name: sawblade
   m_TagString: Sawblade
@@ -80,17 +79,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ZValue: 10
---- !u!114 &114717060085650926
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1765734308859946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cafb4b2359e9ec4aafb177105b9ac11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &212646852551943550
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4454398324479756}
+  - component: {fileID: 114545641555190698}
   m_Layer: 0
   m_Name: LandEffect
   m_TagString: Untagged
@@ -70,6 +71,18 @@ Transform:
   m_Father: {fileID: 4454398324479756}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &114545641555190698
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1384182666843248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3569f97fa52b58d448800cceabe824f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ttl: 2
 --- !u!198 &198812618653579686
 ParticleSystem:
   m_ObjectHideFlags: 1

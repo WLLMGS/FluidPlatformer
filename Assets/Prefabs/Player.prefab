@@ -27,7 +27,8 @@ GameObject:
   - component: {fileID: 58772429160326716}
   - component: {fileID: 114711131930566136}
   - component: {fileID: 114153372765798652}
-  m_Layer: 2
+  - component: {fileID: 114644114661767584}
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -44,13 +45,13 @@ GameObject:
   - component: {fileID: 4123650117358966}
   - component: {fileID: 20122602516932838}
   - component: {fileID: 81201968821408388}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4123650117358966
 Transform:
   m_ObjectHideFlags: 1
@@ -72,7 +73,7 @@ Transform:
   m_GameObject: {fileID: 1095344846554854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.01, y: 1.35, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4123650117358966}
   m_Father: {fileID: 0}
@@ -207,6 +208,19 @@ MonoBehaviour:
   - LevelBegin
   - Finish
   - Sawblade
+--- !u!114 &114644114661767584
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1095344846554854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4628e5b29bf667245b2e03301e3c34e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _brokenPlayer: {fileID: 1809625201891746, guid: 8525aafc4f8002a4fa1cfafce5bd7058,
+    type: 2}
 --- !u!114 &114699779448338578
 MonoBehaviour:
   m_ObjectHideFlags: 1

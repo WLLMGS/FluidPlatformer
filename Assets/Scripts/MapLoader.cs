@@ -12,6 +12,9 @@ public class MapLoader : MonoBehaviour
     [SerializeField] private GameObject _sawtrap;
     [SerializeField] private GameObject _torch;
     [SerializeField] private GameObject _platform;
+    [SerializeField] private GameObject _spikes;
+    [SerializeField] private GameObject _sawshooter;
+
     public void LoadLevel(string filename, Transform parentObj)
     {
         //open file
@@ -64,6 +67,14 @@ public class MapLoader : MonoBehaviour
                 case EntityID.Platform:
                     var platform = Instantiate(_platform, pos, Quaternion.identity);
                     platform.transform.parent = parentObj;
+                    break;
+                case EntityID.Spikes:
+                    var spikes = Instantiate(_spikes, pos, Quaternion.identity);
+                    spikes.transform.parent = parentObj;
+                    break;
+                case EntityID.SawShooter:
+                    var shooter = Instantiate(_sawshooter, pos, Quaternion.identity);
+                    shooter.transform.parent = parentObj;
                     break;
             }
 

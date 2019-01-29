@@ -12,7 +12,9 @@ public enum EntityID
     Grass = 4,
     Sawtrap = 5,
     Torch = 6,
-    Platform = 7
+    Platform = 7,
+    Spikes = 8,
+    SawShooter = 9
 }
 
 public class MapSaver : MonoBehaviour
@@ -35,6 +37,12 @@ public class MapSaver : MonoBehaviour
         //get saw traps
         GameObject[] sawtraps = GameObject.FindGameObjectsWithTag("Sawblade");
 
+        //get spikes
+        GameObject[] spikes = GameObject.FindGameObjectsWithTag("Spikes");
+
+        //get saw shooters
+        GameObject[] sawshooters = GameObject.FindGameObjectsWithTag("SawShooter");
+
         //get torhces
         GameObject[] torches = GameObject.FindGameObjectsWithTag("Torch");
 
@@ -51,7 +59,8 @@ public class MapSaver : MonoBehaviour
         BinaryWriter writer = new BinaryWriter(File.Create(path));
 
         //writer amount of entities to writer
-        int totAmount = blocks.Length + beginnings.Length + finished.Length + grassBlocks.Length + sawtraps.Length + torches.Length + platforms.Length;
+        int totAmount = blocks.Length + beginnings.Length + finished.Length + grassBlocks.Length + sawtraps.Length 
+            + torches.Length + platforms.Length + spikes.Length + sawshooters.Length;
         writer.Write(totAmount);
 
         //write all blocks to file
@@ -130,6 +139,29 @@ public class MapSaver : MonoBehaviour
             writer.Write(pos.y);
             writer.Write(pos.z);
         }
+
+        //write all spikes to file
+        for(int i = 0; i < spikes.Length; ++i)
+        {
+            GameObject spike = spikes[i];
+            Vector3 pos = spike.transform.position;
+            writer.Write((int)EntityID.Spikes);
+            writer.Write(pos.x);
+            writer.Write(pos.y);
+            writer.Write(pos.z);
+        }
+
+        //write all sawshooters to file
+        for (int i = 0; i < sawshooters.Length; ++i)
+        {
+            GameObject sawshooter = sawshooters[i];
+            Vector3 pos = sawshooter.transform.position;
+            writer.Write((int)EntityID.SawShooter);
+            writer.Write(pos.x);
+            writer.Write(pos.y);
+            writer.Write(pos.z);
+        }
+
 
         writer.Close();
     }

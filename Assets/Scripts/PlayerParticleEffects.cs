@@ -28,9 +28,11 @@ public class PlayerParticleEffects : MonoBehaviour {
             && _collisions.Down
             && _rigid.velocity.y <= 0.0f)
         {
-            Debug.Log("yes sir");
             Vector3 pos = transform.position + new Vector3(0.5f,-0.5f, 0);
             var inst =Instantiate(_landEffect, pos, Quaternion.identity);
+
+            //do camera shake
+            CameraShaker.Instance.Shake();
         }
 
         _previouslyGrounded = _collisions.Down;

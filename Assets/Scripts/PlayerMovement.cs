@@ -6,6 +6,14 @@ using UnityEngine.Assertions.Must;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
+    private static bool _CanMove = false;
+
+    public static bool CanMove
+    {
+        get { return _CanMove; }
+        set { _CanMove = value; }
+    }
+
     private PlayerCollisions _collisions;
     private Rigidbody2D _rb;
     private PlayerAnimation _anim;
@@ -52,50 +60,61 @@ public class PlayerMovement : MonoBehaviour
         _gravityScale = _rb.gravityScale;
         _collisions = GetComponent<PlayerCollisions>();
         _anim = GetComponent<PlayerAnimation>();
+
+        //set player to follow
+        PlayerFollowCameraScript.Player = gameObject;
     }
 
     private void Update()
     {
-        _horzAxis = Input.GetAxis("Horizontal");
-        _vertAxis = Input.GetAxis("Vertical");
-
-        if (Input.GetKeyDown(KeyCode.Space)
-        && _canJump
-        && _collisions.Down)
+        if(_CanMove)
         {
-            _doJump = true;
-            StartCoroutine(JumpCooldown());
-        }
-        else if(Input.GetKeyDown(KeyCode.Space)
-            && _TouchingWall
-            && !_doWallJump
-            && !_collisions.Down)
-        {
-            if (_collisions.Right) _wallJumpDir = -1;
-            else _wallJumpDir = 1;
+            _horzAxis = Input.GetAxis("Horizontal");
+            _vertAxis = Input.GetAxis("Vertical");
 
-            _doWallJump = true;
-            StartCoroutine(WallJumpCooldown());
-        }
+            if (Input.GetButtonDown("Jump")
+            && _canJump
+            && _collisions.Down)
+            {
+                _doJump = true;
+                StartCoroutine(JumpCooldown());
+            }
+            else if (Input.GetButtonDown("Jump")
+                && _TouchingWall
+                && !_doWallJump
+                && !_collisions.Down)
+            {
+                if (_collisions.Right) _wallJumpDir = -1;
+                else _wallJumpDir = 1;
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            _dashDirX = _horzAxis > 0 ? 1.0f : -1.0f;
-            _dashDirY = 0.0f;
+                _doWallJump = true;
+                StartCoroutine(WallJumpCooldown());
+            }
 
-            _anim.DoDash = true;
+            if (Input.GetMouseButtonDown(1)
+                || Input.GetButtonDown("Roll"))
+            {
+                _dashDirX = _horzAxis > 0 ? 1.0f : -1.0f;
+                _dashDirY = 0.0f;
 
-            _IsDashing = true;
-            StartCoroutine(DashCooldown());
+                _anim.DoDash = true;
+
+                _IsDashing = true;
+                StartCoroutine(DashCooldown());
+            }
         }
 
     }
 
     private void FixedUpdate()
     {
-        CheckCollisions();
-        HandleMovement();
-        HandleJump();
+        if(_CanMove)
+        {
+            CheckCollisions();
+            HandleMovement();
+            HandleJump();
+        }
+        
     }
 
     private void HandleMovement()

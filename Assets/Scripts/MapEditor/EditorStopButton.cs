@@ -22,6 +22,10 @@ public class EditorStopButton : MonoBehaviour
         //destroy the player
         Destroy(player);
 
+        //destroy follow camera
+        var cam = GameObject.FindGameObjectWithTag("FollowCamera");
+        if (cam) Destroy(cam);
+
         //reenable the editor camera
         _editorCamera.SetActive(true);
     }

@@ -10,6 +10,10 @@ TagManager:
   - Sawblade
   - Torch
   - Platform
+  - FollowCamera
+  - PlayerCorpse
+  - Spikes
+  - SawShooter
   layers:
   - Default
   - TransparentFX
@@ -20,8 +24,8 @@ TagManager:
   - 
   - 
   - NoPlayerCollision
-  - 
-  - 
+  - TestLayer
+  - BasicLayer
   - 
   - 
   - 

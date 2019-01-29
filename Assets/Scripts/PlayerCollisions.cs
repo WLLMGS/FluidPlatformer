@@ -8,8 +8,8 @@ public class PlayerCollisions : MonoBehaviour
 {
     [SerializeField] private List<string> _tagsToIgnore = new List<string>();
 
-    private float _rayLengthHorz = 0.5f;
-    private float _rayLenghtVert = 0.5f;
+    private float _rayLengthHorz = 0.75f;
+    private float _rayLenghtVert = 0.65f;
 
     private bool _Down = false;
     private bool _Up = false;
@@ -34,6 +34,11 @@ public class PlayerCollisions : MonoBehaviour
     {
         get { return _Left; }
     }
+    LayerMask mask;
+    private void Start()
+    {
+        mask = 1 << 9;
+    }
 
     private void Update()
     {
@@ -52,9 +57,9 @@ public class PlayerCollisions : MonoBehaviour
         Debug.DrawRay(transform.position + new Vector3(-0.25f, 0, 0), new Vector3(0, -_rayLenghtVert, 0), Color.green);
 
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(0, -1), _rayLenghtVert);
-        RaycastHit2D hit2 = Physics2D.Raycast(transform.position + new Vector3(0.25f, 0, 0), new Vector2(0, -1), _rayLenghtVert);
-        RaycastHit2D hit3 = Physics2D.Raycast(transform.position + new Vector3(-0.25f, 0, 0), new Vector2(0, -1), _rayLenghtVert);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(0, -1), _rayLenghtVert, mask);
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position + new Vector3(0.25f, 0, 0), new Vector2(0, -1), _rayLenghtVert, mask);
+        RaycastHit2D hit3 = Physics2D.Raycast(transform.position + new Vector3(-0.25f, 0, 0), new Vector2(0, -1), _rayLenghtVert, mask);
 
         //if(DoesCollide(hit, hit2, hit3))
         if(hit || hit2 || hit3)
@@ -92,12 +97,12 @@ public class PlayerCollisions : MonoBehaviour
     {
         //DEBUG
         Debug.DrawRay(transform.position, new Vector3(_rayLengthHorz, 0), Color.green);
-        Debug.DrawRay(transform.position + new Vector3(0, 0.25f, 0), new Vector3(_rayLengthHorz, 0), Color.green);
         Debug.DrawRay(transform.position + new Vector3(0, -0.25f, 0), new Vector3(_rayLengthHorz, 0), Color.green);
+        Debug.DrawRay(transform.position + new Vector3(0, -0.5f, 0), new Vector3(_rayLengthHorz, 0), Color.green);
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(1, 0), _rayLengthHorz);
-        RaycastHit2D hit2 = Physics2D.Raycast(transform.position + new Vector3(0, 0.25f, 0), new Vector2(1, 0), _rayLengthHorz);
-        RaycastHit2D hit3 = Physics2D.Raycast(transform.position + new Vector3(0, -0.25f, 0), new Vector2(1, 0), _rayLengthHorz);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(1, 0), _rayLengthHorz, mask);
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position + new Vector3(0, 0.25f, 0), new Vector2(1, 0), _rayLengthHorz, mask);
+        RaycastHit2D hit3 = Physics2D.Raycast(transform.position + new Vector3(0, -0.25f, 0), new Vector2(1, 0), _rayLengthHorz, mask);
 
         if (DoesCollide(hit, hit2, hit3))
         {
@@ -113,12 +118,12 @@ public class PlayerCollisions : MonoBehaviour
     {
         //DEBUG
         Debug.DrawRay(transform.position, new Vector3(-_rayLengthHorz, 0), Color.green);
-        Debug.DrawRay(transform.position + new Vector3(0, 0.25f, 0), new Vector3(-_rayLengthHorz, 0), Color.green);
         Debug.DrawRay(transform.position + new Vector3(0, -0.25f, 0), new Vector3(-_rayLengthHorz, 0), Color.green);
+        Debug.DrawRay(transform.position + new Vector3(0, -0.5f, 0), new Vector3(-_rayLengthHorz, 0), Color.green);
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(-1, 0), _rayLengthHorz);
-        RaycastHit2D hit2 = Physics2D.Raycast(transform.position + new Vector3(0, 0.25f, 0), new Vector2(-1, 0), _rayLengthHorz);
-        RaycastHit2D hit3 = Physics2D.Raycast(transform.position + new Vector3(0, -0.25f, 0), new Vector2(-1, 0), _rayLengthHorz);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(-1, 0), _rayLengthHorz, mask);
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position + new Vector3(0, 0.25f, 0), new Vector2(-1, 0), _rayLengthHorz, mask);
+        RaycastHit2D hit3 = Physics2D.Raycast(transform.position + new Vector3(0, -0.25f, 0), new Vector2(-1, 0), _rayLengthHorz, mask);
 
         if (DoesCollide(hit, hit2, hit3))
         {

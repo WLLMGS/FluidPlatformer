@@ -69,7 +69,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         //if (_rb.velocity.x < 0.0f) _renderer.flipX = true;
         //else if (_rb.velocity.x > 0.0f) _renderer.flipX = false;
-        if (_rb.velocity.x < 0.0f) transform.localScale = new Vector3(-0.75f,0.75f,1);
-        else if (_rb.velocity.x > 0.0f) transform.localScale = new Vector3(0.75f, 0.75f, 1);
+        if (_rb.velocity.x < 0.0f) transform.localScale = new Vector3(-1.0f,1.0f,1);
+        else if (_rb.velocity.x > 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1);
     }
 }
