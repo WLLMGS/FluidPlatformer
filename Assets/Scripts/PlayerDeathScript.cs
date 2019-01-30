@@ -15,7 +15,8 @@ public class PlayerDeathScript : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Sawblade")
+        if(collision.tag == "Sawblade"
+            || collision.tag == "SawbladeProjectile")
         {
             //notify gameplay manager
             GameplayManager.Instance.NotifyPlayerDeath();

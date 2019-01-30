@@ -34,6 +34,8 @@ public class MapLoader : MonoBehaviour
             float z = reader.ReadSingle();
             Vector3 pos = new Vector3(x, y, z);
 
+            float angle = reader.ReadSingle();
+
             //cast entity id to entityID
             EntityID eid = (EntityID)id;
 
@@ -41,39 +43,39 @@ public class MapLoader : MonoBehaviour
             switch (eid)
             {
                 case EntityID.Block:
-                    var block = Instantiate(_block, pos, Quaternion.identity);
+                    var block = Instantiate(_block, pos, Quaternion.Euler(new Vector3(0,0,angle)));
                     block.transform.parent = parentObj;
                     break;
                 case EntityID.Beginning:
-                    var begin = Instantiate(_beginFlag, pos, Quaternion.identity);
+                    var begin = Instantiate(_beginFlag, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
                     begin.transform.parent = parentObj;
                     break;
                 case EntityID.Finish:
-                    var finish = Instantiate(_finishFlag, pos, Quaternion.identity);
+                    var finish = Instantiate(_finishFlag, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
                     finish.transform.parent = parentObj;
                     break;
                 case EntityID.Grass:
-                    var grass = Instantiate(_grassBlock, pos, Quaternion.identity);
+                    var grass = Instantiate(_grassBlock, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
                     grass.transform.parent = parentObj;
                     break;
                 case EntityID.Sawtrap:
-                    var sawtrap = Instantiate(_sawtrap, pos, Quaternion.identity);
+                    var sawtrap = Instantiate(_sawtrap, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
                     sawtrap.transform.parent = parentObj;
                     break;
                 case EntityID.Torch:
-                    var torch = Instantiate(_torch, pos, Quaternion.identity);
+                    var torch = Instantiate(_torch, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
                     torch.transform.parent = parentObj;
                     break;
                 case EntityID.Platform:
-                    var platform = Instantiate(_platform, pos, Quaternion.identity);
+                    var platform = Instantiate(_platform, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
                     platform.transform.parent = parentObj;
                     break;
                 case EntityID.Spikes:
-                    var spikes = Instantiate(_spikes, pos, Quaternion.identity);
+                    var spikes = Instantiate(_spikes, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
                     spikes.transform.parent = parentObj;
                     break;
                 case EntityID.SawShooter:
-                    var shooter = Instantiate(_sawshooter, pos, Quaternion.identity);
+                    var shooter = Instantiate(_sawshooter, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
                     shooter.transform.parent = parentObj;
                     break;
             }

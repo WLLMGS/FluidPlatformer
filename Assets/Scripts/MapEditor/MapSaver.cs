@@ -25,11 +25,8 @@ public class MapSaver : MonoBehaviour
 
     public void SaveLevel(string path)
     {
-        Debug.Log(path);
-
         //get all objects with block tag
         GameObject[] blocks = GameObject.FindGameObjectsWithTag("Block");
-        Debug.Log(blocks.Length);
 
         //get grass blocks
         GameObject[] grassBlocks = GameObject.FindGameObjectsWithTag("Grass");
@@ -72,6 +69,9 @@ public class MapSaver : MonoBehaviour
             writer.Write(pos.x);
             writer.Write(pos.y);
             writer.Write(pos.z);
+
+            float rotZ = block.transform.eulerAngles.z;
+            writer.Write(rotZ);
         }
 
         //write all beginnings to file
@@ -83,6 +83,9 @@ public class MapSaver : MonoBehaviour
             writer.Write(pos.x);
             writer.Write(pos.y);
             writer.Write(pos.z);
+
+            float rotZ = beginning.transform.eulerAngles.z;
+            writer.Write(rotZ);
         }
 
         //write all finishes to file
@@ -94,6 +97,9 @@ public class MapSaver : MonoBehaviour
             writer.Write(pos.x);
             writer.Write(pos.y);
             writer.Write(pos.z);
+
+            float rotZ = finish.transform.eulerAngles.z;
+            writer.Write(rotZ);
         }
         
         //write all grass blocks to file
@@ -105,6 +111,9 @@ public class MapSaver : MonoBehaviour
             writer.Write(pos.x);
             writer.Write(pos.y);
             writer.Write(pos.z);
+
+            float rotZ = grass.transform.eulerAngles.z;
+            writer.Write(rotZ);
         }
 
         //write all sawtraps to file
@@ -116,6 +125,9 @@ public class MapSaver : MonoBehaviour
             writer.Write(pos.x);
             writer.Write(pos.y);
             writer.Write(pos.z);
+
+            float rotZ = saw.transform.eulerAngles.z;
+            writer.Write(rotZ);
         }
 
         //write all torches to file
@@ -127,6 +139,9 @@ public class MapSaver : MonoBehaviour
             writer.Write(pos.x);
             writer.Write(pos.y);
             writer.Write(pos.z);
+
+            float rotZ = torch.transform.eulerAngles.z;
+            writer.Write(rotZ);
         }
        
         //write all platforms to file
@@ -138,6 +153,9 @@ public class MapSaver : MonoBehaviour
             writer.Write(pos.x);
             writer.Write(pos.y);
             writer.Write(pos.z);
+
+            float rotZ = platform.transform.eulerAngles.z;
+            writer.Write(rotZ);
         }
 
         //write all spikes to file
@@ -149,6 +167,9 @@ public class MapSaver : MonoBehaviour
             writer.Write(pos.x);
             writer.Write(pos.y);
             writer.Write(pos.z);
+
+            float rotZ = spike.transform.eulerAngles.z;
+            writer.Write(rotZ);
         }
 
         //write all sawshooters to file
@@ -160,6 +181,9 @@ public class MapSaver : MonoBehaviour
             writer.Write(pos.x);
             writer.Write(pos.y);
             writer.Write(pos.z);
+
+            float rotZ = sawshooter.transform.eulerAngles.z;
+            writer.Write(rotZ);
         }
 
 

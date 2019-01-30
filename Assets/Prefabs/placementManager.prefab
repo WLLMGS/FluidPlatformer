@@ -73,6 +73,8 @@ MonoBehaviour:
   - {fileID: 1863617501701046, guid: b1ba21bf7c3e91d4b96429e2e0646a53, type: 2}
   - {fileID: 1667815408405406, guid: e9598f5c5c373d542ab027f60f300a84, type: 2}
   - {fileID: 1177818337914580, guid: c6cb09f8328845b40a999398a00a4abe, type: 2}
+  - {fileID: 1934233327174848, guid: 8e81cfa99d0901a4fab9524f8a9e8ebc, type: 2}
+  - {fileID: 1565280057961998, guid: b582465b11acb204dbe4b798e31b5838, type: 2}
   _deletionBlock: {fileID: 1862096708610662, guid: 799a99fb685f0b4448088c008b688ca5,
     type: 2}
   _filenameSave: {fileID: 0}
@@ -97,3 +99,6 @@ MonoBehaviour:
   _sawtrap: {fileID: 1765734308859946, guid: 94f580bc82a25664fa267af4e658af68, type: 2}
   _torch: {fileID: 1667815408405406, guid: e9598f5c5c373d542ab027f60f300a84, type: 2}
   _platform: {fileID: 1177818337914580, guid: c6cb09f8328845b40a999398a00a4abe, type: 2}
+  _spikes: {fileID: 1934233327174848, guid: 8e81cfa99d0901a4fab9524f8a9e8ebc, type: 2}
+  _sawshooter: {fileID: 1565280057961998, guid: b582465b11acb204dbe4b798e31b5838,
+    type: 2}

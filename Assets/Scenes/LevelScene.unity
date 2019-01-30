@@ -339,7 +339,7 @@ Prefab:
         type: 2}
       propertyPath: _sawshooter
       value: 
-      objectReference: {fileID: 1565280057961998, guid: b582465b11acb204dbe4b798e31b5838,
+      objectReference: {fileID: 1565280057961998, guid: 886ddf9cf90168d49a3be15706464442,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c9e2930b89b69e4da8a9cbd7c600844, type: 2}

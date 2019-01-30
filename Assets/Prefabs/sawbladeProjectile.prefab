@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114037842463772294}
   m_Layer: 0
   m_Name: sawbladeProjectile
-  m_TagString: Untagged
+  m_TagString: SawbladeProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3622a98cfc809424e824091e519b4195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _blood: {fileID: 1645861249375502, guid: 601544f2c41da734fbbb312ad5ce5a67, type: 2}
 --- !u!212 &212094241707677656
 SpriteRenderer:
   m_ObjectHideFlags: 1

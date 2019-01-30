@@ -99,7 +99,9 @@ public class PlacementManager : MonoBehaviour
 
             foreach (GameObject block in currentSelected)
             {
-                var obj = Instantiate(block, block.transform.position + new Vector3(0,0, blockdata.ZValue), Quaternion.identity);
+                var obj = Instantiate(block, block.transform.position + new Vector3(0,0, blockdata.ZValue)
+                    , block.transform.rotation);
+
                 obj.GetComponent<Collider2D>().enabled = true;
                 obj.transform.parent = _levelParent.transform;
             }
@@ -198,6 +200,12 @@ public class PlacementManager : MonoBehaviour
             _placementMode = PlacementMode.Delete;
 
             AttachDeletionBlocks();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            //rotate blocks + 90.0f
+            RotateSelectedBlocks();
         }
     }
 
@@ -309,6 +317,13 @@ public class PlacementManager : MonoBehaviour
     }
 
 
+    private void RotateSelectedBlocks()
+    {
+        foreach(var block in currentSelected)
+        {
+            block.transform.Rotate(new Vector3(0, 0, 90.0f));
+        }
+    }
     public void SetIsHoveringOverButton(bool b)
     {
         _IsHoveringOverButton = b;
@@ -391,5 +406,7 @@ public class PlacementManager : MonoBehaviour
 
         _mapLoader.LoadLevel(path, _levelParent.transform);
     }
+
+    
 }
 

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SawbladeProjectileScript : MonoBehaviour {
 
+    [SerializeField] private GameObject _blood;
+
     private Vector2 _direction = Vector2.zero;
     public Vector2 Direction
     {
@@ -19,8 +21,31 @@ public class SawbladeProjectileScript : MonoBehaviour {
         _rigid = GetComponent<Rigidbody2D>();
     }
 
+    private void Update()
+    {
+        Rotate();
+    }
+
     private void FixedUpdate()
     {
         _rigid.velocity = new Vector2(_velocity.x * _direction.x, _velocity.y * _direction.y);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Block")
+        {
+            Destroy(gameObject);
+        }
+        else if(collision.tag == "Player"
+            || collision.tag == "PlayerCorpse")
+        {
+            Instantiate(_blood, transform.position, Quaternion.identity);
+        }
+    }
+
+    private void Rotate()
+    {
+        transform.Rotate(new Vector3(0, 0, 360.0f * Time.deltaTime));
     }
 }
