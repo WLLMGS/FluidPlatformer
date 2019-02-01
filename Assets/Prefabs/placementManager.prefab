@@ -78,7 +78,7 @@ MonoBehaviour:
   _deletionBlock: {fileID: 1862096708610662, guid: 799a99fb685f0b4448088c008b688ca5,
     type: 2}
   _filenameSave: {fileID: 0}
-  _filenameLoad: {fileID: 0}
+  _filenameDropdown: {fileID: 0}
 --- !u!114 &114833764039565734
 MonoBehaviour:
   m_ObjectHideFlags: 1

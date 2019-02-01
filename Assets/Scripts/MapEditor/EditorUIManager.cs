@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EditorUIManager : MonoBehaviour
 {
@@ -48,7 +50,26 @@ public class EditorUIManager : MonoBehaviour
 
     public void ShowLoadPopUp()
     {
+        _dropdown.ClearOptions();
+
         _LoadPopUp.SetActive(true);
+
+        string[] results = Directory.GetFiles("Levels/");
+
+        List<string> options = new List<string>();
+
+        foreach(string path in results)
+        {
+            int indBegin = path.IndexOf('/', 0, path.Length);
+            int indEnd = path.IndexOf('.', 0, path.Length);
+            int length = indEnd - (indBegin + 1);
+
+            string file = path.Substring(indBegin + 1, length);
+            Debug.Log(file);
+            options.Add(file);
+        }
+
+        _dropdown.AddOptions(options);
     }
 
     public void HideLoadPopUp()
@@ -56,7 +77,10 @@ public class EditorUIManager : MonoBehaviour
         _LoadPopUp.SetActive(false);
     }
 
-    //===== LAST SAVED / LOADED FILE
+    //===== DROPDOWN =====
+    [SerializeField] private Dropdown _dropdown;
+
+    //===== LAST SAVED / LOADED FILE =====
     private string _LastEditedFile = "";
 
     public string LastEditedFile
@@ -64,6 +88,8 @@ public class EditorUIManager : MonoBehaviour
         get { return _LastEditedFile; }
         set { _LastEditedFile = value; }
     }
+
+    
 
     //===== START =====
     private void Start()

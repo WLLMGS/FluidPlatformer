@@ -293,54 +293,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114507461142640592, guid: 4c9e2930b89b69e4da8a9cbd7c600844,
-        type: 2}
-      propertyPath: _sawtrap
-      value: 
-      objectReference: {fileID: 1765734308859946, guid: 6fa8c2a8b782dda42a6ed4a023f8caf9,
-        type: 2}
-    - target: {fileID: 114507461142640592, guid: 4c9e2930b89b69e4da8a9cbd7c600844,
-        type: 2}
-      propertyPath: _torch
-      value: 
-      objectReference: {fileID: 1667815408405406, guid: f9be9d19e6a0d7e4cbac19311f58e990,
-        type: 2}
-    - target: {fileID: 114507461142640592, guid: 4c9e2930b89b69e4da8a9cbd7c600844,
-        type: 2}
-      propertyPath: _platform
-      value: 
-      objectReference: {fileID: 1177818337914580, guid: c6cb09f8328845b40a999398a00a4abe,
-        type: 2}
-    - target: {fileID: 114507461142640592, guid: 4c9e2930b89b69e4da8a9cbd7c600844,
-        type: 2}
-      propertyPath: _grassBlock
-      value: 
-      objectReference: {fileID: 1863617501701046, guid: eaac88392e36cf249baf8a9896134551,
-        type: 2}
-    - target: {fileID: 114507461142640592, guid: 4c9e2930b89b69e4da8a9cbd7c600844,
-        type: 2}
-      propertyPath: _finishFlag
-      value: 
-      objectReference: {fileID: 1160264578892394, guid: 889f0567380162d4a83b0fc19bd0a84c,
-        type: 2}
-    - target: {fileID: 114507461142640592, guid: 4c9e2930b89b69e4da8a9cbd7c600844,
-        type: 2}
-      propertyPath: _beginFlag
-      value: 
-      objectReference: {fileID: 1231489958039864, guid: db91d8987d0763d49b444297fac9cf09,
-        type: 2}
-    - target: {fileID: 114507461142640592, guid: 4c9e2930b89b69e4da8a9cbd7c600844,
-        type: 2}
-      propertyPath: _spikes
-      value: 
-      objectReference: {fileID: 1934233327174848, guid: 8e81cfa99d0901a4fab9524f8a9e8ebc,
-        type: 2}
-    - target: {fileID: 114507461142640592, guid: 4c9e2930b89b69e4da8a9cbd7c600844,
-        type: 2}
-      propertyPath: _sawshooter
-      value: 
-      objectReference: {fileID: 1565280057961998, guid: 886ddf9cf90168d49a3be15706464442,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c9e2930b89b69e4da8a9cbd7c600844, type: 2}
   m_IsPrefabAsset: 0

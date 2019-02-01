@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4815582516837626}
-  - component: {fileID: 114942515069444622}
   - component: {fileID: 61867015268174298}
   - component: {fileID: 114031426140145390}
   m_Layer: 0
@@ -139,18 +138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sawPrefab: {fileID: 1540395272307804, guid: 2e755ddd00f9fea49b921e1317e10f69, type: 2}
---- !u!114 &114942515069444622
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1565280057961998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f95fe7e05f3a2b04c97f0472bccce7ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ZValue: 10
 --- !u!212 &212542699469310324
 SpriteRenderer:
   m_ObjectHideFlags: 1

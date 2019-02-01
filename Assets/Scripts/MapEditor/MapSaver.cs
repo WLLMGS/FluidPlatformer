@@ -72,6 +72,10 @@ public class MapSaver : MonoBehaviour
 
             float rotZ = block.transform.eulerAngles.z;
             writer.Write(rotZ);
+
+            var tile = block.GetComponent<AutoTilingScript>();
+            int id = (int)tile.ID;
+            writer.Write(id);
         }
 
         //write all beginnings to file

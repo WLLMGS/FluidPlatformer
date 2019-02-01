@@ -51,9 +51,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c8a9cb2723ec964fbd512ab6a382be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _block: {fileID: 1907384749017484, guid: 1ee1e3cec54355547aad4b0e6129e48b, type: 2}
-  _beginFlag: {fileID: 1231489958039864, guid: 0e618e58c1aeef44a976c103dc808765, type: 2}
-  _finishFlag: {fileID: 1160264578892394, guid: aba320e160460184bb66b804267bc58d,
+  _block: {fileID: 1907384749017484, guid: c63e72c2913dfac4083d297309d8b180, type: 2}
+  _beginFlag: {fileID: 1231489958039864, guid: db91d8987d0763d49b444297fac9cf09, type: 2}
+  _finishFlag: {fileID: 1160264578892394, guid: 889f0567380162d4a83b0fc19bd0a84c,
     type: 2}
-  _grassBlock: {fileID: 1863617501701046, guid: b1ba21bf7c3e91d4b96429e2e0646a53,
+  _grassBlock: {fileID: 1863617501701046, guid: eaac88392e36cf249baf8a9896134551,
+    type: 2}
+  _sawtrap: {fileID: 1765734308859946, guid: 6fa8c2a8b782dda42a6ed4a023f8caf9, type: 2}
+  _torch: {fileID: 1667815408405406, guid: f9be9d19e6a0d7e4cbac19311f58e990, type: 2}
+  _platform: {fileID: 1177818337914580, guid: c6cb09f8328845b40a999398a00a4abe, type: 2}
+  _spikes: {fileID: 1934233327174848, guid: 8e81cfa99d0901a4fab9524f8a9e8ebc, type: 2}
+  _sawshooter: {fileID: 1565280057961998, guid: 886ddf9cf90168d49a3be15706464442,
     type: 2}

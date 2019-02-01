@@ -30,7 +30,7 @@ public class PlacementManager : MonoBehaviour
     [SerializeField] private List<GameObject> _placeableObjects = new List<GameObject>();
     [SerializeField] private GameObject _deletionBlock = null;
     [SerializeField] private Text _filenameSave;
-    [SerializeField] private Text _filenameLoad;
+    [SerializeField] private Dropdown _filenameDropdown;
 
     private List<GameObject> currentSelected = new List<GameObject>();
     private GameObject _levelParent;
@@ -393,16 +393,12 @@ public class PlacementManager : MonoBehaviour
         //get filename
         string path;
 
-        if(_filenameLoad.text == "" || _filenameLoad.text == null)
-        {
-            return;
-        }
-        else
-        {
-            path = "Levels/" + _filenameLoad.text + ".bin";
-        }
+        int index = _filenameDropdown.value;
+        string name = _filenameDropdown.options[index].text;
 
-        EditorUIManager.Instance.LastEditedFile = _filenameLoad.text;
+        path = "Levels/" + name + ".bin";
+
+        EditorUIManager.Instance.LastEditedFile = name;
 
         _mapLoader.LoadLevel(path, _levelParent.transform);
     }

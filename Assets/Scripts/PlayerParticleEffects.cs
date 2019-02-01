@@ -10,6 +10,7 @@ public class PlayerParticleEffects : MonoBehaviour {
     private Rigidbody2D _rigid;
 
     private bool _previouslyGrounded = true;
+    private float _airbornTimer = 0.0f;
 
     private void Start()
     {
@@ -32,8 +33,26 @@ public class PlayerParticleEffects : MonoBehaviour {
             var inst =Instantiate(_landEffect, pos, Quaternion.identity);
 
             //do camera shake
-            CameraShaker.Instance.Shake();
+            if(_airbornTimer >= 0.75f)
+            {
+                CameraShaker.Instance.Shake();
+            }
+            //reset airborn timer -> not in air anymore
+            _airbornTimer = 0.0f;
         }
+
+        //restart the airborn timer if first jumps (dont know if necessary)
+        if (_previouslyGrounded
+            && !_collisions.Down)
+        {
+            //start timer
+            _airbornTimer = 0.0f;
+        }
+
+        //reset the aiborn timer if colliding w/ walls -> cus wallslide
+        if (_collisions.Right || _collisions.Left) _airbornTimer = 0;
+
+        _airbornTimer += Time.deltaTime;
 
         _previouslyGrounded = _collisions.Down;
     }

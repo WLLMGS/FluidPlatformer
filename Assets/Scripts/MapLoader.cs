@@ -15,6 +15,7 @@ public class MapLoader : MonoBehaviour
     [SerializeField] private GameObject _spikes;
     [SerializeField] private GameObject _sawshooter;
 
+   
     public void LoadLevel(string filename, Transform parentObj)
     {
         //open file
@@ -45,6 +46,16 @@ public class MapLoader : MonoBehaviour
                 case EntityID.Block:
                     var block = Instantiate(_block, pos, Quaternion.Euler(new Vector3(0,0,angle)));
                     block.transform.parent = parentObj;
+
+                    int blockID = reader.ReadInt32();
+
+                    //get tile comp and set id
+                    var scr = block.GetComponent<WorldTileScript>();
+                    if(scr)
+                    {
+                        scr.ID = blockID;
+                    }
+
                     break;
                 case EntityID.Beginning:
                     var begin = Instantiate(_beginFlag, pos, Quaternion.Euler(new Vector3(0, 0, angle)));

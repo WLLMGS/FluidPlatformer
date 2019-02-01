@@ -2,6 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BlockType
+{
+    TOP_LEFT,
+    TOP_MIDDLE,
+    TOP_RIGHT,
+    SIDE_MIDDLE_LEFT,
+    SIDE_MIDDLE_RIGHT,
+    MIDDLE_MIDDLE,
+    BOTTOM_LEFT,
+    BOTTOM_MIDDLE,
+    BOTTOM_RIGHT
+}
+
 public class AutoTilingScript : MonoBehaviour
 {
     [SerializeField] private Sprite _TopCorner;
@@ -10,6 +23,13 @@ public class AutoTilingScript : MonoBehaviour
     [SerializeField] private Sprite _BottomCorner;
     [SerializeField] private Sprite _BottomMiddle;
     [SerializeField] private Sprite _MiddleMiddle;
+
+    private BlockType _ID = 0;
+
+    public BlockType ID
+    {
+        get { return _ID; }
+    }
 
     private SpriteRenderer _renderer;
     void Start()
@@ -45,6 +65,7 @@ public class AutoTilingScript : MonoBehaviour
         {
             _renderer.flipX = false;
             _renderer.sprite = _TopCorner;
+            _ID = BlockType.TOP_LEFT;
         }
         //top middle
         else if (!hitUp
@@ -53,9 +74,9 @@ public class AutoTilingScript : MonoBehaviour
             && hitRight
            )
         {
-
             _renderer.flipX = false;
             _renderer.sprite = _TopMiddle;
+            _ID = BlockType.TOP_MIDDLE;
         }
         //top right
         else if (!hitRight
@@ -65,6 +86,7 @@ public class AutoTilingScript : MonoBehaviour
         {
             _renderer.flipX = true;
             _renderer.sprite = _TopCorner;
+            _ID = BlockType.TOP_RIGHT;
         }
         //side middle left
         else if (!hitLeft
@@ -75,6 +97,7 @@ public class AutoTilingScript : MonoBehaviour
         {
             _renderer.flipX = false;
             _renderer.sprite = _SideMiddle;
+            _ID = BlockType.SIDE_MIDDLE_LEFT;
         }
         //side middle right
         else if (!hitRight
@@ -85,6 +108,7 @@ public class AutoTilingScript : MonoBehaviour
         {
             _renderer.flipX = true;
             _renderer.sprite = _SideMiddle;
+            _ID = BlockType.SIDE_MIDDLE_RIGHT;
         }
         //middle middle
         else if (hitRight
@@ -95,6 +119,7 @@ public class AutoTilingScript : MonoBehaviour
         {
             _renderer.flipX = false;
             _renderer.sprite = _MiddleMiddle;
+            _ID = BlockType.MIDDLE_MIDDLE;
         }
         //bottom corner left
         else if (hitRight
@@ -105,6 +130,7 @@ public class AutoTilingScript : MonoBehaviour
         {
             _renderer.flipX = false;
             _renderer.sprite = _BottomCorner;
+            _ID = BlockType.BOTTOM_LEFT;
         }
         //bottom corner right
         else if (hitLeft
@@ -115,6 +141,7 @@ public class AutoTilingScript : MonoBehaviour
         {
             _renderer.flipX = true;
             _renderer.sprite = _BottomCorner;
+            _ID = BlockType.BOTTOM_RIGHT;
         }
         //bottom center
         else if (hitUp
@@ -125,6 +152,7 @@ public class AutoTilingScript : MonoBehaviour
         {
             _renderer.flipX = false;
             _renderer.sprite = _BottomMiddle;
+            _ID = BlockType.BOTTOM_MIDDLE;
         }
     }
 
