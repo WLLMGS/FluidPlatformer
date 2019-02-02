@@ -14,7 +14,8 @@ public enum EntityID
     Torch = 6,
     Platform = 7,
     Spikes = 8,
-    SawShooter = 9
+    SawShooter = 9,
+    Slime = 10
 }
 
 public class MapSaver : MonoBehaviour
@@ -52,12 +53,15 @@ public class MapSaver : MonoBehaviour
         //get finish
         GameObject[] finished = GameObject.FindGameObjectsWithTag("Finish");
 
+        //get slimes
+        GameObject[] slimes = GameObject.FindGameObjectsWithTag("Slime");
+
         //open binary writer
         BinaryWriter writer = new BinaryWriter(File.Create(path));
 
         //writer amount of entities to writer
         int totAmount = blocks.Length + beginnings.Length + finished.Length + grassBlocks.Length + sawtraps.Length 
-            + torches.Length + platforms.Length + spikes.Length + sawshooters.Length;
+            + torches.Length + platforms.Length + spikes.Length + sawshooters.Length + slimes.Length;
         writer.Write(totAmount);
 
         //write all blocks to file
@@ -190,6 +194,19 @@ public class MapSaver : MonoBehaviour
             writer.Write(rotZ);
         }
 
+        //add slimes
+        for (int i = 0; i < slimes.Length; ++i)
+        {
+            GameObject slime = slimes[i];
+            Vector3 pos = slime.transform.position;
+            writer.Write((int)EntityID.Slime);
+            writer.Write(pos.x);
+            writer.Write(pos.y);
+            writer.Write(pos.z);
+
+            float rotZ = slime.transform.eulerAngles.z;
+            writer.Write(rotZ);
+        }
 
         writer.Close();
     }

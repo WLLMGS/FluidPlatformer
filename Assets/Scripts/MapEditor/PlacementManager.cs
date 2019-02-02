@@ -43,7 +43,7 @@ public class PlacementManager : MonoBehaviour
     private bool _canPlaceBlocks = true;
 
     private bool _IsHoveringOverButton = false;
-    private int _BrushSize = 3;
+    private int _BrushSize = 1;
     private int _selectedID = 0;
 
 

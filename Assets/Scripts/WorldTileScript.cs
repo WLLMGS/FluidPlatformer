@@ -12,7 +12,8 @@ public class WorldTileScript : MonoBehaviour {
     [SerializeField] private Sprite _MiddleMiddle;
 
     private SpriteRenderer _renderer;
-    private Collider2D _collider;
+    private EdgeCollider2D[] _colliders;
+
     private BlockType _ID;
 
     public int ID
@@ -23,9 +24,10 @@ public class WorldTileScript : MonoBehaviour {
     private void Start()
     {
         _renderer = GetComponent<SpriteRenderer>();
-        _collider = GetComponent<Collider2D>();
 
-        if (_renderer && _collider) InitBlock();
+        _colliders = GetComponents<EdgeCollider2D>();
+
+        if (_renderer && _colliders.Length > 0) InitBlock();
     }
 
     private void InitBlock()
@@ -53,7 +55,10 @@ public class WorldTileScript : MonoBehaviour {
                 _renderer.sprite = _SideMiddle;
                 break;
             case BlockType.MIDDLE_MIDDLE:
-                Destroy(_collider);
+                foreach(var col in _colliders)
+                {
+                    Destroy(col);
+                }
                 _renderer.flipX = false;
                 _renderer.sprite = _MiddleMiddle;
                 break;

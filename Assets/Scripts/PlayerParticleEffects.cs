@@ -27,7 +27,7 @@ public class PlayerParticleEffects : MonoBehaviour {
     {
         if(!_previouslyGrounded
             && _collisions.Down
-            && _rigid.velocity.y <= 0.0f)
+            )
         {
             Vector3 pos = transform.position + new Vector3(0.5f,-0.5f, 0);
             var inst =Instantiate(_landEffect, pos, Quaternion.identity);

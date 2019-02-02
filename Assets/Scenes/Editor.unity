@@ -465,6 +465,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114542046077037650, guid: 33ec578f90bd3af4399d013afd0039f4,
+        type: 2}
+      propertyPath: _placeableObjects.Array.size
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4489107487081514, guid: 33ec578f90bd3af4399d013afd0039f4, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0.16206871
@@ -512,6 +517,18 @@ Prefab:
       propertyPath: _filenameDropdown
       value: 
       objectReference: {fileID: 1483472622}
+    - target: {fileID: 114542046077037650, guid: 33ec578f90bd3af4399d013afd0039f4,
+        type: 2}
+      propertyPath: _placeableObjects.Array.data[9]
+      value: 
+      objectReference: {fileID: 1353798857137544, guid: f343ac1ca3a3d8445af7ff61acc1fa49,
+        type: 2}
+    - target: {fileID: 114833764039565734, guid: 33ec578f90bd3af4399d013afd0039f4,
+        type: 2}
+      propertyPath: _slime
+      value: 
+      objectReference: {fileID: 1353798857137544, guid: f343ac1ca3a3d8445af7ff61acc1fa49,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33ec578f90bd3af4399d013afd0039f4, type: 2}
   m_IsPrefabAsset: 0

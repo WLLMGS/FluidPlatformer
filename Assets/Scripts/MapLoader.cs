@@ -14,7 +14,7 @@ public class MapLoader : MonoBehaviour
     [SerializeField] private GameObject _platform;
     [SerializeField] private GameObject _spikes;
     [SerializeField] private GameObject _sawshooter;
-
+    [SerializeField] private GameObject _slime;
    
     public void LoadLevel(string filename, Transform parentObj)
     {
@@ -88,6 +88,10 @@ public class MapLoader : MonoBehaviour
                 case EntityID.SawShooter:
                     var shooter = Instantiate(_sawshooter, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
                     shooter.transform.parent = parentObj;
+                    break;
+                case EntityID.Slime:
+                    var slime = Instantiate(_slime, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
+                    slime.transform.parent = parentObj;
                     break;
             }
 

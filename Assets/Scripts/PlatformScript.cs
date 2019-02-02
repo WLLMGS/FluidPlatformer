@@ -34,6 +34,7 @@ public class PlatformScript : MonoBehaviour {
         if(collision.gameObject.tag == "Player")
         {
             _isColliding = true;
+            Debug.Log("Colliding");
         }
     }
 

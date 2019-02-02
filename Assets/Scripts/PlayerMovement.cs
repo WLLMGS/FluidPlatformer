@@ -45,15 +45,21 @@ public class PlayerMovement : MonoBehaviour
     private bool _doWallJump = false;
     private int _wallJumpDir = 1;
 
+    public bool DoJump
+    {
+        set
+        {
+            _doJump = value;
+            StartCoroutine(JumpCooldown());
+        }
+        get { return _doJump; }
+    }
 
     public bool IsDashing
     {
         get { return _IsDashing; }
     }
-    public bool DoJump
-    {
-        get { return _doJump; }
-    }
+    
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
