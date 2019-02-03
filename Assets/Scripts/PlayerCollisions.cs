@@ -6,9 +6,7 @@ using UnityEngine;
 
 public class PlayerCollisions : MonoBehaviour
 {
-    [SerializeField] private List<string> _tagsToIgnore = new List<string>();
-
-    private float _rayLengthHorz = 0.65f;
+    private float _rayLengthHorz = 0.50f;
     private float _rayLenghtVert = 0.65f;
 
     private bool _Down = false;
@@ -141,9 +139,9 @@ public class PlayerCollisions : MonoBehaviour
         bool match2 = false;
         bool match3 = false;
 
-        if ((hit) && hit.collider.tag == "Block") match1 = true;
-        if ((hit2) && hit2.collider.tag == "Block") match2 = true;
-        if ((hit3) && hit3.collider.tag == "Block") match3 = true;
+        if ((hit) && (hit.collider.tag == "Block" || hit.collider.tag == "WeakBlock")) match1 = true;
+        if ((hit2) && (hit2.collider.tag == "Block" || hit2.collider.tag == "WeakBlock")) match2 = true;
+        if ((hit3) && (hit3.collider.tag == "Block" || hit3.collider.tag == "WeakBlock")) match3 = true;
 
         return (match1 || match2 || match3);
     }

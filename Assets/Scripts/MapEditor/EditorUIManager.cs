@@ -21,15 +21,23 @@ public class EditorUIManager : MonoBehaviour
 
     //===== BLOCK PLACING BUTTONS =====
     [SerializeField] private GameObject _buttonPrefab;
-    private List<GameObject> _buttons = new List<GameObject>();
     private float _buttonOffset = 64.0f;
+
+    private float _startX = 64.0f;
+    private float _startY = -64.0f;
+
+    private int _nrItemsPerColumn = 10;
 
     public void AddButton(int index)
     {
         var inst = Instantiate(_buttonPrefab, transform);
         inst.GetComponent<ButtonPlaceableObject>().Index = index;
         inst.SetActive(true);
-        inst.transform.position -= new Vector3(0, index * _buttonOffset, 0);
+
+        RectTransform rectTrans = inst.GetComponent<RectTransform>();
+        rectTrans.position += new Vector3(_startX + (_buttonOffset * (int)(index / _nrItemsPerColumn))
+                                        , _startY - (index % _nrItemsPerColumn * _buttonOffset)
+                                        , 0);
     }
 
     //===== SAVE POP UP =====
@@ -58,7 +66,7 @@ public class EditorUIManager : MonoBehaviour
 
         List<string> options = new List<string>();
 
-        foreach(string path in results)
+        foreach (string path in results)
         {
             int indBegin = path.IndexOf('/', 0, path.Length);
             int indEnd = path.IndexOf('.', 0, path.Length);
@@ -89,7 +97,7 @@ public class EditorUIManager : MonoBehaviour
         set { _LastEditedFile = value; }
     }
 
-    
+
 
     //===== START =====
     private void Start()

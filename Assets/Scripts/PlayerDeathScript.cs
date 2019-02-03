@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDeathScript : MonoBehaviour {
+public class PlayerDeathScript : MonoBehaviour
+{
 
     [SerializeField] private GameObject _brokenPlayer;
     private PlayerMovement _movement;
@@ -22,7 +23,7 @@ public class PlayerDeathScript : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Sawblade"
+        if (collision.tag == "Sawblade"
             || collision.tag == "SawbladeProjectile")
         {
             //notify gameplay manager
@@ -32,7 +33,7 @@ public class PlayerDeathScript : MonoBehaviour {
             //destroy current player
             Destroy(gameObject);
         }
-        else if(collision.tag == "Spikes")
+        else if (collision.tag == "Spikes")
         {
             //notify of death
             GameplayManager.Instance.NotifyPlayerDeath();
@@ -44,9 +45,7 @@ public class PlayerDeathScript : MonoBehaviour {
         else if (collision.gameObject.tag == "SlimeHitbox")
         {
             _movement.DoJump = true;
-            Debug.Log("HIT");
-            Destroy(collision.gameObject.transform.parent.gameObject);
-
+            
             //get parent slime obj
             var slime = collision.transform.parent.gameObject;
             //get collider
@@ -57,9 +56,9 @@ public class PlayerDeathScript : MonoBehaviour {
             if (collider) collider.enabled = false;
             //do death event
             if (scr) scr.Die();
-            
+
         }
-        
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -68,17 +67,16 @@ public class PlayerDeathScript : MonoBehaviour {
         {
             var scr = collision.gameObject.GetComponent<SlimeBehaviorScript>();
 
-            if(scr
+            if (scr
                 && scr.IsDangerous)
             {
                 //notify of death
                 GameplayManager.Instance.NotifyPlayerDeath();
                 //replace with broken player
                 ReplaceWithBrokenPlayer();
-                //destroy current player
                 Destroy(gameObject);
             }
-            
+
         }
     }
 }

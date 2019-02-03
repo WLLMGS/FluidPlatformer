@@ -299,6 +299,18 @@ Prefab:
       value: 
       objectReference: {fileID: 1353798857137544, guid: b56166dd536192946b58021188179764,
         type: 2}
+    - target: {fileID: 114507461142640592, guid: 4c9e2930b89b69e4da8a9cbd7c600844,
+        type: 2}
+      propertyPath: _background
+      value: 
+      objectReference: {fileID: 1906177935746872, guid: a33957c5863c2cf4cbc73b0a0c4eb674,
+        type: 2}
+    - target: {fileID: 114507461142640592, guid: 4c9e2930b89b69e4da8a9cbd7c600844,
+        type: 2}
+      propertyPath: _weakBlock
+      value: 
+      objectReference: {fileID: 1934343925264544, guid: 50f2b5bf61b20084a848add2012b4bac,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c9e2930b89b69e4da8a9cbd7c600844, type: 2}
   m_IsPrefabAsset: 0

@@ -7,7 +7,6 @@ public class PlayerParticleEffects : MonoBehaviour {
     [SerializeField] private GameObject _landEffect;
 
     private PlayerCollisions _collisions;
-    private Rigidbody2D _rigid;
 
     private bool _previouslyGrounded = true;
     private float _airbornTimer = 0.0f;
@@ -15,7 +14,6 @@ public class PlayerParticleEffects : MonoBehaviour {
     private void Start()
     {
         _collisions = GetComponent<PlayerCollisions>();
-        _rigid = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -30,7 +28,7 @@ public class PlayerParticleEffects : MonoBehaviour {
             )
         {
             Vector3 pos = transform.position + new Vector3(0.5f,-0.5f, 0);
-            var inst =Instantiate(_landEffect, pos, Quaternion.identity);
+            Instantiate(_landEffect, pos, Quaternion.identity);
 
             //do camera shake
             if(_airbornTimer >= 0.75f)

@@ -30,12 +30,14 @@ public class GameplayManager : MonoBehaviour {
 
     private bool _isPlayerDead = false;
 
+    private List<ResetObjectScript> _resetableObjects;
+
     private void Start()
     {
         //make parent object
         _levelParent = new GameObject("Level");
         //load initial level
-        _mapLoader.LoadLevel(_rootPath + "levelVideo" + _extention, _levelParent.transform);
+        _resetableObjects =_mapLoader.LoadLevel(_rootPath + "levelVideo" + _extention, _levelParent.transform);
         //get level start
         _levelStart = GameObject.FindGameObjectWithTag("LevelBegin");
         //spawn player
@@ -51,6 +53,8 @@ public class GameplayManager : MonoBehaviour {
     public void NotifyPlayerDeath()
     {
         _isPlayerDead = true;
+
+        
     }
 
     private void HandleRespawning()
@@ -63,6 +67,9 @@ public class GameplayManager : MonoBehaviour {
             _isPlayerDead = false;
             //respawn player
             SpawnPlayer();
+
+            foreach (var comp in _resetableObjects) comp.Reset();
+            
         }
     }
 

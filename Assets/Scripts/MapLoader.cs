@@ -15,11 +15,16 @@ public class MapLoader : MonoBehaviour
     [SerializeField] private GameObject _spikes;
     [SerializeField] private GameObject _sawshooter;
     [SerializeField] private GameObject _slime;
-   
-    public void LoadLevel(string filename, Transform parentObj)
+    [SerializeField] private GameObject _background;
+    [SerializeField] private GameObject _weakBlock;
+
+    public List<ResetObjectScript> LoadLevel(string filename, Transform parentObj)
     {
         //open file
         BinaryReader reader = new BinaryReader(File.OpenRead(filename));
+
+
+        List<ResetObjectScript> resetableObjects = new List<ResetObjectScript>();
 
         //get amount of entities in level
         int amountOfEntities = reader.ReadInt32();
@@ -40,18 +45,20 @@ public class MapLoader : MonoBehaviour
             //cast entity id to entityID
             EntityID eid = (EntityID)id;
 
+            ResetObjectScript resetComp;
+
             //spawn right block depending on entity ID
             switch (eid)
             {
                 case EntityID.Block:
-                    var block = Instantiate(_block, pos, Quaternion.Euler(new Vector3(0,0,angle)));
+                    var block = Instantiate(_block, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
                     block.transform.parent = parentObj;
 
                     int blockID = reader.ReadInt32();
 
                     //get tile comp and set id
                     var scr = block.GetComponent<WorldTileScript>();
-                    if(scr)
+                    if (scr)
                     {
                         scr.ID = blockID;
                     }
@@ -92,12 +99,28 @@ public class MapLoader : MonoBehaviour
                 case EntityID.Slime:
                     var slime = Instantiate(_slime, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
                     slime.transform.parent = parentObj;
+                    resetComp = slime.GetComponent<ResetObjectScript>();
+                    if (resetComp) resetableObjects.Add(resetComp);
+                    resetComp = null;
+                    break;
+                case EntityID.DarkBackground:
+                    var background = Instantiate(_background, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
+                    background.transform.parent = parentObj;
+                    break;
+                case EntityID.WeakBlock:
+                    var weakBlock = Instantiate(_weakBlock, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
+                    weakBlock.transform.parent = parentObj;
+                    resetComp = weakBlock.GetComponent<ResetObjectScript>();
+                    if (resetComp) resetableObjects.Add(resetComp);
+                    resetComp = null;
                     break;
             }
 
         }
 
         reader.Close();
+
+        return resetableObjects;
     }
 
 }

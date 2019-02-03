@@ -15,7 +15,9 @@ public enum EntityID
     Platform = 7,
     Spikes = 8,
     SawShooter = 9,
-    Slime = 10
+    Slime = 10,
+    DarkBackground = 11,
+    WeakBlock = 12
 }
 
 public class MapSaver : MonoBehaviour
@@ -56,12 +58,20 @@ public class MapSaver : MonoBehaviour
         //get slimes
         GameObject[] slimes = GameObject.FindGameObjectsWithTag("Slime");
 
+        //dark background
+        GameObject[] backgrounds = GameObject.FindGameObjectsWithTag("DarkBackground");
+
+        //weak blocks
+        GameObject[] weakBlocks = GameObject.FindGameObjectsWithTag("WeakBlock");
+
         //open binary writer
         BinaryWriter writer = new BinaryWriter(File.Create(path));
 
         //writer amount of entities to writer
         int totAmount = blocks.Length + beginnings.Length + finished.Length + grassBlocks.Length + sawtraps.Length 
-            + torches.Length + platforms.Length + spikes.Length + sawshooters.Length + slimes.Length;
+            + torches.Length + platforms.Length + spikes.Length + sawshooters.Length + slimes.Length + backgrounds.Length
+            + weakBlocks.Length;
+
         writer.Write(totAmount);
 
         //write all blocks to file
@@ -207,7 +217,33 @@ public class MapSaver : MonoBehaviour
             float rotZ = slime.transform.eulerAngles.z;
             writer.Write(rotZ);
         }
+        //add dark backgrounds
+        for (int i = 0; i < backgrounds.Length; ++i)
+        {
+            GameObject background = backgrounds[i];
+            Vector3 pos = background.transform.position;
+            writer.Write((int)EntityID.DarkBackground);
+            writer.Write(pos.x);
+            writer.Write(pos.y);
+            writer.Write(pos.z);
 
+            float rotZ = background.transform.eulerAngles.z;
+            writer.Write(rotZ);
+        }
+
+        //add weak blocks
+        for (int i = 0; i < weakBlocks.Length; ++i)
+        {
+            GameObject weakBlock = weakBlocks[i];
+            Vector3 pos = weakBlock.transform.position;
+            writer.Write((int)EntityID.WeakBlock);
+            writer.Write(pos.x);
+            writer.Write(pos.y);
+            writer.Write(pos.z);
+
+            float rotZ = weakBlock.transform.eulerAngles.z;
+            writer.Write(rotZ);
+        }
         writer.Close();
     }
 }

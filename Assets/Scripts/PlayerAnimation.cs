@@ -9,7 +9,6 @@ public class PlayerAnimation : MonoBehaviour
 
     private Animator _anim;
     private Rigidbody2D _rb;
-    private SpriteRenderer _renderer;
     private PlayerMovement _playerMovement;
 
     private bool _DoDash = false;
@@ -25,7 +24,6 @@ public class PlayerAnimation : MonoBehaviour
         _playerMovement = GetComponent<PlayerMovement>();
         _anim = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
-        _renderer = GetComponent<SpriteRenderer>();
         _anim.speed = 2.0f;
     }
 

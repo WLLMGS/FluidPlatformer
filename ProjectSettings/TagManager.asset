@@ -17,6 +17,8 @@ TagManager:
   - SawbladeProjectile
   - Slime
   - SlimeHitbox
+  - DarkBackground
+  - WeakBlock
   layers:
   - Default
   - TransparentFX

@@ -23,25 +23,18 @@ public class PlayerMovement : MonoBehaviour
     private float _wallJumpForce = 20.0f;
 
     private float _horzAxis = 0;
-    private float _vertAxis = 0;
     private bool _doJump = false;
     private bool _canJump = false;
-    private float _gravityScale = 0;
-    private float _dashTimer = 0.0f;
     private float _dashCooldown = 0.1f;
-
+    private bool _TouchingWall = false;
     private float _jumpCooldown = 0.1f;
     private float _wallJumpCooldown = 0.1f;
-    
-    private bool _IsGrounded = false;
 
     private float _dashSpeed = 50.0f;
     private float _dashDirX = 1;
-    private float _dashDirY = 1;
     private bool _IsDashing = false;
 
-    private bool _canWallJump = true;
-    private bool _TouchingWall = false;
+
     private bool _doWallJump = false;
     private int _wallJumpDir = 1;
 
@@ -59,11 +52,10 @@ public class PlayerMovement : MonoBehaviour
     {
         get { return _IsDashing; }
     }
-    
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _gravityScale = _rb.gravityScale;
         _collisions = GetComponent<PlayerCollisions>();
         _anim = GetComponent<PlayerAnimation>();
 
@@ -73,10 +65,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if(_CanMove)
+        if (_CanMove)
         {
             _horzAxis = Input.GetAxis("Horizontal");
-            _vertAxis = Input.GetAxis("Vertical");
 
             if (Input.GetButtonDown("Jump")
             && _canJump
@@ -101,7 +92,6 @@ public class PlayerMovement : MonoBehaviour
                 || Input.GetButtonDown("Roll"))
             {
                 _dashDirX = _horzAxis > 0 ? 1.0f : -1.0f;
-                _dashDirY = 0.0f;
 
                 _anim.DoDash = true;
 
@@ -114,13 +104,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(_CanMove)
+        if (_CanMove)
         {
             CheckCollisions();
             HandleMovement();
             HandleJump();
         }
-        
+
     }
 
     private void HandleMovement()
