@@ -10,7 +10,8 @@ namespace BehaviorTree
     {
         Running,
         Success,
-        Failure
+        Failure,
+        Continue
     }
 
 
@@ -51,6 +52,8 @@ namespace BehaviorTree
                         break;
                     case NodeState.Success:
                         return result;
+                    case NodeState.Continue:
+                        break;
                     
                 }
             }
@@ -79,6 +82,8 @@ namespace BehaviorTree
                     case NodeState.Success:
                         break;
                     case NodeState.Failure:
+                        return result;
+                    case NodeState.Continue:
                         return result;
                 }
             }
