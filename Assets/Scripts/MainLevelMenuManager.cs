@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class MainLevelMenuManager : MonoBehaviour {
 
     [SerializeField] private GameObject _menu;
-
+    [SerializeField] private GameObject _firstButton;
+    [SerializeField] private EventSystem _eventSystem;
     private bool _IsPaused = false;
 
     private void Start()
@@ -16,7 +19,7 @@ public class MainLevelMenuManager : MonoBehaviour {
 
     private void Update()
     {
-       if(Input.GetKeyDown(KeyCode.Escape))
+       if(Input.GetButtonDown("Start"))
         {
             if (_IsPaused) UnPause();
             else Pause();
@@ -28,6 +31,8 @@ public class MainLevelMenuManager : MonoBehaviour {
         _IsPaused = true;
         Time.timeScale = 0.0f;
         _menu.SetActive(true);
+        StartCoroutine(SelectFirstButton());
+
     }
     private void UnPause()
     {
@@ -56,5 +61,12 @@ public class MainLevelMenuManager : MonoBehaviour {
     public void QuitButton()
     {
         Application.Quit();
+    }
+
+    private IEnumerator SelectFirstButton()
+    {
+        _eventSystem.SetSelectedGameObject(null);
+        yield return null;
+        _eventSystem.SetSelectedGameObject(_eventSystem.firstSelectedGameObject);
     }
 }

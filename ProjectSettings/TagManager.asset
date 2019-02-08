@@ -19,6 +19,7 @@ TagManager:
   - SlimeHitbox
   - DarkBackground
   - WeakBlock
+  - BouncePad
   layers:
   - Default
   - TransparentFX

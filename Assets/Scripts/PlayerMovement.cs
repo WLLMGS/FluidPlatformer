@@ -38,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
     private bool _doWallJump = false;
     private int _wallJumpDir = 1;
 
+    private float _jumpMultiplier = 1.0f;
+
     public bool DoJump
     {
         set
@@ -46,6 +48,12 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(JumpCooldown());
         }
         get { return _doJump; }
+    }
+
+    public float JumpMultiplier
+    {
+        get { return _jumpMultiplier; }
+        set { _jumpMultiplier = value; }
     }
 
     public bool IsDashing
@@ -129,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_doJump)
         {
-            _rb.velocity = new Vector2(_rb.velocity.x, _jumpforce);
+            _rb.velocity = new Vector2(_rb.velocity.x, _jumpforce * _jumpMultiplier);
         }
 
         if (_doWallJump)
@@ -156,6 +164,7 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(_jumpCooldown);
         _doJump = false;
+        _jumpMultiplier = 1.0f;
     }
 
     private IEnumerator DashCooldown()

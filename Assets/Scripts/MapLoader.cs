@@ -17,6 +17,7 @@ public class MapLoader : MonoBehaviour
     [SerializeField] private GameObject _slime;
     [SerializeField] private GameObject _background;
     [SerializeField] private GameObject _weakBlock;
+    [SerializeField] private GameObject _bouncePad;
 
     public List<ResetObjectScript> LoadLevel(string filename, Transform parentObj)
     {
@@ -113,6 +114,10 @@ public class MapLoader : MonoBehaviour
                     resetComp = weakBlock.GetComponent<ResetObjectScript>();
                     if (resetComp) resetableObjects.Add(resetComp);
                     resetComp = null;
+                    break;
+                case EntityID.BouncePad:
+                    var bouncePad = Instantiate(_bouncePad, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
+                    bouncePad.transform.parent = parentObj;
                     break;
             }
 

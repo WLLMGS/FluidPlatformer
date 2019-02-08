@@ -184,11 +184,11 @@ public class PlacementManager : MonoBehaviour
     //replace soon
     void HandleControls()
     {
-        if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             IncreaseBrushSize();
         }
-        if (Input.GetKeyDown(KeyCode.KeypadMinus))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             DecreaseBrushSize();
         }

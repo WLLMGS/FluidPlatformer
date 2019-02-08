@@ -17,7 +17,8 @@ public enum EntityID
     SawShooter = 9,
     Slime = 10,
     DarkBackground = 11,
-    WeakBlock = 12
+    WeakBlock = 12,
+    BouncePad = 13
 }
 
 public class MapSaver : MonoBehaviour
@@ -64,13 +65,16 @@ public class MapSaver : MonoBehaviour
         //weak blocks
         GameObject[] weakBlocks = GameObject.FindGameObjectsWithTag("WeakBlock");
 
+        //bounce pads
+        GameObject[] bouncePads = GameObject.FindGameObjectsWithTag("BouncePad");
+
         //open binary writer
         BinaryWriter writer = new BinaryWriter(File.Create(path));
 
         //writer amount of entities to writer
         int totAmount = blocks.Length + beginnings.Length + finished.Length + grassBlocks.Length + sawtraps.Length 
             + torches.Length + platforms.Length + spikes.Length + sawshooters.Length + slimes.Length + backgrounds.Length
-            + weakBlocks.Length;
+            + weakBlocks.Length + bouncePads.Length;
 
         writer.Write(totAmount);
 
@@ -242,6 +246,20 @@ public class MapSaver : MonoBehaviour
             writer.Write(pos.z);
 
             float rotZ = weakBlock.transform.eulerAngles.z;
+            writer.Write(rotZ);
+        }
+
+        //add weak blocks
+        for (int i = 0; i < bouncePads.Length; ++i)
+        {
+            GameObject bouncePad = bouncePads[i];
+            Vector3 pos = bouncePad.transform.position;
+            writer.Write((int)EntityID.BouncePad);
+            writer.Write(pos.x);
+            writer.Write(pos.y);
+            writer.Write(pos.z);
+
+            float rotZ = bouncePad.transform.eulerAngles.z;
             writer.Write(rotZ);
         }
         writer.Close();
