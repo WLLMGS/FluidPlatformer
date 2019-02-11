@@ -7,7 +7,7 @@ public class FinishScript : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            Debug.Log("LEVEL END");
+            GameplayManager.Instance.NotifyLevelFinish();
         }
     }
 }

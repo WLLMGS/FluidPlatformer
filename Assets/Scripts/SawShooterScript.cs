@@ -6,7 +6,7 @@ public class SawShooterScript : MonoBehaviour {
 
     [SerializeField] private GameObject _sawPrefab;
     private bool _isReadyToShoot = true;
-    private float _cooldown = 1.0f;
+    private float _cooldown = 1.5f;
 
     private void Update()
     {

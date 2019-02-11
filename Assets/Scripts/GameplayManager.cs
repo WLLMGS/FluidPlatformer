@@ -1,8 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameplayManager : MonoBehaviour {
+public class GameplayManager : MonoBehaviour
+{
 
     //===== SINGLETON =====
     private static GameplayManager _instance = null;
@@ -20,6 +23,7 @@ public class GameplayManager : MonoBehaviour {
     //===== MAIN =====
     [SerializeField] private MapLoader _mapLoader;
     [SerializeField] private GameObject _player;
+    [SerializeField] private string _filename = "levelVideo";
 
     private GameObject _levelParent;
     private GameObject _levelStart;
@@ -37,7 +41,7 @@ public class GameplayManager : MonoBehaviour {
         //make parent object
         _levelParent = new GameObject("Level");
         //load initial level
-        _resetableObjects =_mapLoader.LoadLevel(_rootPath + "levelVideo" + _extention, _levelParent.transform);
+        _resetableObjects = _mapLoader.LoadLevel(_rootPath + _filename + _extention, _levelParent.transform);
         //get level start
         _levelStart = GameObject.FindGameObjectWithTag("LevelBegin");
         //spawn player
@@ -53,23 +57,34 @@ public class GameplayManager : MonoBehaviour {
     public void NotifyPlayerDeath()
     {
         _isPlayerDead = true;
+    }
 
-        
+    public void NotifyLevelFinish()
+    {
+        int currentIndex = SceneManager.GetActiveScene().buildIndex;
+        try
+        {
+            SceneManager.LoadScene(currentIndex + 1);
+        }
+        catch (Exception e)
+        {
+            Debug.Log("AT THE END OF SCENES");
+        }
     }
 
     private void HandleRespawning()
     {
-        if(_isPlayerDead
+        if (_isPlayerDead
             && (Input.GetKeyDown(KeyCode.R)
             || Input.GetButtonDown("Jump")))
         {
-             PlayerMovement.CanMove = false;
+            PlayerMovement.CanMove = false;
             _isPlayerDead = false;
             //respawn player
             SpawnPlayer();
 
             foreach (var comp in _resetableObjects) comp.Reset();
-            
+
         }
     }
 
