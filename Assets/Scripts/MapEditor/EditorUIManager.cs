@@ -26,7 +26,7 @@ public class EditorUIManager : MonoBehaviour
     private float _startX = 64.0f;
     private float _startY = -64.0f;
 
-    private int _nrItemsPerColumn = 10;
+    private int _nrItemsPerColumn = 8;
 
     public void AddButton(int index)
     {

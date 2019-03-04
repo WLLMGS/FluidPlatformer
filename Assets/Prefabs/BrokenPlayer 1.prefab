@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114018255636660698}
   m_Layer: 8
   m_Name: broken_player_3
-  m_TagString: Player
+  m_TagString: PlayerCorpse
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 114435415362073154}
   m_Layer: 8
   m_Name: broken_player_2
-  m_TagString: Player
+  m_TagString: PlayerCorpse
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 114928500808678552}
   m_Layer: 8
   m_Name: broken_player_4
-  m_TagString: Player
+  m_TagString: PlayerCorpse
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

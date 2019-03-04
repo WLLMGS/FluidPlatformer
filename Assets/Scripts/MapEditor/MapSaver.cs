@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -18,7 +19,8 @@ public enum EntityID
     Slime = 10,
     DarkBackground = 11,
     WeakBlock = 12,
-    BouncePad = 13
+    BouncePad = 13,
+    FollowCamera = 14
 }
 
 public class MapSaver : MonoBehaviour
@@ -68,22 +70,25 @@ public class MapSaver : MonoBehaviour
         //bounce pads
         GameObject[] bouncePads = GameObject.FindGameObjectsWithTag("BouncePad");
 
+        //camera
+        GameObject followCam = GameObject.FindGameObjectWithTag("FollowCamera");
+
         //open binary writer
         BinaryWriter writer = new BinaryWriter(File.Create(path));
 
         //writer amount of entities to writer
-        int totAmount = blocks.Length + beginnings.Length + finished.Length + grassBlocks.Length + sawtraps.Length 
+        int totAmount = blocks.Length + beginnings.Length + finished.Length + grassBlocks.Length + sawtraps.Length
             + torches.Length + platforms.Length + spikes.Length + sawshooters.Length + slimes.Length + backgrounds.Length
-            + weakBlocks.Length + bouncePads.Length;
+            + weakBlocks.Length + bouncePads.Length + 1;
 
         writer.Write(totAmount);
 
         //write all blocks to file
-        for(int i = 0; i < blocks.Length; ++i)
+        for (int i = 0; i < blocks.Length; ++i)
         {
             GameObject block = blocks[i];
             Vector3 pos = block.transform.position;
-            writer.Write((int) EntityID.Block);
+            writer.Write((int)EntityID.Block);
             writer.Write(pos.x);
             writer.Write(pos.y);
             writer.Write(pos.z);
@@ -97,7 +102,7 @@ public class MapSaver : MonoBehaviour
         }
 
         //write all beginnings to file
-        for(int i = 0; i < beginnings.Length; ++i)
+        for (int i = 0; i < beginnings.Length; ++i)
         {
             GameObject beginning = beginnings[i];
             Vector3 pos = beginning.transform.position;
@@ -111,7 +116,7 @@ public class MapSaver : MonoBehaviour
         }
 
         //write all finishes to file
-        for(int i = 0; i < finished.Length; ++i)
+        for (int i = 0; i < finished.Length; ++i)
         {
             GameObject finish = finished[i];
             Vector3 pos = finish.transform.position;
@@ -123,9 +128,9 @@ public class MapSaver : MonoBehaviour
             float rotZ = finish.transform.eulerAngles.z;
             writer.Write(rotZ);
         }
-        
+
         //write all grass blocks to file
-        for(int i = 0; i < grassBlocks.Length; ++i)
+        for (int i = 0; i < grassBlocks.Length; ++i)
         {
             GameObject grass = grassBlocks[i];
             Vector3 pos = grass.transform.position;
@@ -165,7 +170,7 @@ public class MapSaver : MonoBehaviour
             float rotZ = torch.transform.eulerAngles.z;
             writer.Write(rotZ);
         }
-       
+
         //write all platforms to file
         for (int i = 0; i < platforms.Length; ++i)
         {
@@ -181,7 +186,7 @@ public class MapSaver : MonoBehaviour
         }
 
         //write all spikes to file
-        for(int i = 0; i < spikes.Length; ++i)
+        for (int i = 0; i < spikes.Length; ++i)
         {
             GameObject spike = spikes[i];
             Vector3 pos = spike.transform.position;
@@ -262,6 +267,21 @@ public class MapSaver : MonoBehaviour
             float rotZ = bouncePad.transform.eulerAngles.z;
             writer.Write(rotZ);
         }
+
+        //add follow camera
+        {
+            Vector3 camPos = followCam.transform.position;
+
+            writer.Write((int)EntityID.FollowCamera);
+            writer.Write(camPos.x);
+            writer.Write(camPos.y);
+            writer.Write(camPos.z);
+
+            float rotZ = followCam.transform.eulerAngles.z;
+            writer.Write(rotZ);
+        }
+
+
         writer.Close();
     }
 }

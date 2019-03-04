@@ -468,7 +468,7 @@ Prefab:
     - target: {fileID: 114542046077037650, guid: 33ec578f90bd3af4399d013afd0039f4,
         type: 2}
       propertyPath: _placeableObjects.Array.size
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4489107487081514, guid: 33ec578f90bd3af4399d013afd0039f4, type: 2}
       propertyPath: m_LocalPosition.x
@@ -564,6 +564,18 @@ Prefab:
       propertyPath: _placeableObjects.Array.data[12]
       value: 
       objectReference: {fileID: 1009279549447392, guid: 254761f9b291c2e4fb3e5f4f273c2c33,
+        type: 2}
+    - target: {fileID: 114542046077037650, guid: 33ec578f90bd3af4399d013afd0039f4,
+        type: 2}
+      propertyPath: _placeableObjects.Array.data[13]
+      value: 
+      objectReference: {fileID: 1644054255580760, guid: 0f76d9bb9da893f42b531fb6ccf68f11,
+        type: 2}
+    - target: {fileID: 114833764039565734, guid: 33ec578f90bd3af4399d013afd0039f4,
+        type: 2}
+      propertyPath: _followCamera
+      value: 
+      objectReference: {fileID: 1644054255580760, guid: 0f76d9bb9da893f42b531fb6ccf68f11,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33ec578f90bd3af4399d013afd0039f4, type: 2}
@@ -681,11 +693,6 @@ Prefab:
       propertyPath: _eventSystem
       value: 
       objectReference: {fileID: 394356726}
-    - target: {fileID: 114543163017746776, guid: c4e61c1e6fbbc8744a49ecd8cd605ef2,
-        type: 2}
-      propertyPath: _firstButton
-      value: 
-      objectReference: {fileID: 1614056649}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4e61c1e6fbbc8744a49ecd8cd605ef2, type: 2}
   m_IsPrefabAsset: 0

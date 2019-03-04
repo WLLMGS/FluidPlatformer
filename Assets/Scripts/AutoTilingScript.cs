@@ -32,9 +32,11 @@ public class AutoTilingScript : MonoBehaviour
     }
 
     private SpriteRenderer _renderer;
+    private LayerMask _mask;
     void Start()
     {
         _renderer = GetComponent<SpriteRenderer>();
+        _mask = 1 << 9;
 
         if (_renderer) CheckSurroundings();
         UpdateSurroundings();
@@ -45,10 +47,10 @@ public class AutoTilingScript : MonoBehaviour
     {
         _renderer = GetComponent<SpriteRenderer>();
 
-        RaycastHit2D RaycastHitUp = Physics2D.Raycast(transform.position + new Vector3(0, 1, 0), Vector2.zero);
-        RaycastHit2D RaycastHitRight = Physics2D.Raycast(transform.position + new Vector3(1, 0, 0), Vector2.zero);
-        RaycastHit2D RaycastHitDown = Physics2D.Raycast(transform.position + new Vector3(0, -1, 0), Vector2.zero);
-        RaycastHit2D RaycastHitLeft = Physics2D.Raycast(transform.position + new Vector3(-1, 0, 0), Vector2.zero);
+        RaycastHit2D RaycastHitUp = Physics2D.Raycast(transform.position + new Vector3(0, 1, 0), Vector2.zero, _mask);
+        RaycastHit2D RaycastHitRight = Physics2D.Raycast(transform.position + new Vector3(1, 0, 0), Vector2.zero, _mask);
+        RaycastHit2D RaycastHitDown = Physics2D.Raycast(transform.position + new Vector3(0, -1, 0), Vector2.zero, _mask);
+        RaycastHit2D RaycastHitLeft = Physics2D.Raycast(transform.position + new Vector3(-1, 0, 0), Vector2.zero, _mask);
 
         bool hitUp = CheckRaycastHit(RaycastHitUp);
         bool hitRight = CheckRaycastHit(RaycastHitRight);
@@ -158,10 +160,10 @@ public class AutoTilingScript : MonoBehaviour
 
     private void UpdateSurroundings()
     {
-        RaycastHit2D hitUp = Physics2D.Raycast(transform.position + new Vector3(0, 1, 0), Vector2.zero);
-        RaycastHit2D hitRight = Physics2D.Raycast(transform.position + new Vector3(1, 0, 0), Vector2.zero);
-        RaycastHit2D hitDown = Physics2D.Raycast(transform.position + new Vector3(0, -1, 0), Vector2.zero);
-        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position + new Vector3(-1, 0, 0), Vector2.zero);
+        RaycastHit2D hitUp = Physics2D.Raycast(transform.position + new Vector3(0, 1, 0), Vector2.zero, _mask);
+        RaycastHit2D hitRight = Physics2D.Raycast(transform.position + new Vector3(1, 0, 0), Vector2.zero, _mask);
+        RaycastHit2D hitDown = Physics2D.Raycast(transform.position + new Vector3(0, -1, 0), Vector2.zero, _mask);
+        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position + new Vector3(-1, 0, 0), Vector2.zero, _mask);
 
         if (hitUp)
         {

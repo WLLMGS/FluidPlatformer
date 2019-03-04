@@ -11,13 +11,14 @@ public class LevelSelectMenuManager : MonoBehaviour
     private int _currentIndex = 0;
     private bool _canNavigate = true;
     private float _navigationCooldown = 0.2f;
+    private float _cameraOffset = 5;
 
     private void Start()
     {
         if (_levelsButtons.Count > 0)
         {
             //determine new camera pos
-            Vector3 newPos = _levelsButtons[_currentIndex].transform.position;
+            Vector3 newPos = _levelsButtons[_currentIndex].transform.position + new Vector3(_cameraOffset, 0,0);
             newPos.z = _camera.transform.position.z;
             //set camera to that pos
             _camera.transform.position = newPos;
@@ -72,7 +73,8 @@ public class LevelSelectMenuManager : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             int index = _levelsButtons[_currentIndex].GetComponent<LevelSelectMenuItem>().SceneIndex;
-            SceneManager.LoadScene(index);
+            string name = "Level" + index.ToString();
+            SceneManager.LoadScene(name);
         }
     }
 
@@ -123,7 +125,7 @@ public class LevelSelectMenuManager : MonoBehaviour
     private void TransitionCamera()
     {
         //determine new position
-        Vector3 newPos = _levelsButtons[_currentIndex].transform.position;
+        Vector3 newPos = _levelsButtons[_currentIndex].transform.position + new Vector3(_cameraOffset, 0, 0);
         newPos.z = _camera.transform.position.z;
         //set new position
         _camera.Target = newPos;

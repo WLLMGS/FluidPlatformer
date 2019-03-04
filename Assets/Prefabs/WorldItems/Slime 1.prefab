@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4461842365086720}
   - component: {fileID: 61513386086789474}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hitbox
   m_TagString: SlimeHitbox
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 61544729992058522}
   - component: {fileID: 114746541207654354}
   - component: {fileID: 114665071893294486}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Slime 1
   m_TagString: Slime
   m_Icon: {fileID: 0}

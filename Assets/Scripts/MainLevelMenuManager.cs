@@ -50,13 +50,13 @@ public class MainLevelMenuManager : MonoBehaviour {
     public void MapEditorButton()
     {
         UnPause();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Editor");
     }
 
     public void MainGameButton()
     {
         UnPause();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("LevelSelectionScene");
     }
     public void QuitButton()
     {

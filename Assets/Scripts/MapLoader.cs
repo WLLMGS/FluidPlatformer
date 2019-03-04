@@ -18,6 +18,7 @@ public class MapLoader : MonoBehaviour
     [SerializeField] private GameObject _background;
     [SerializeField] private GameObject _weakBlock;
     [SerializeField] private GameObject _bouncePad;
+    [SerializeField] private GameObject _followCamera;
 
     public List<ResetObjectScript> LoadLevel(string filename, Transform parentObj)
     {
@@ -118,6 +119,10 @@ public class MapLoader : MonoBehaviour
                 case EntityID.BouncePad:
                     var bouncePad = Instantiate(_bouncePad, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
                     bouncePad.transform.parent = parentObj;
+                    break;
+                case EntityID.FollowCamera:
+                    var camobj = Instantiate(_followCamera, pos, Quaternion.identity);
+                    camobj.transform.parent = parentObj;
                     break;
             }
 

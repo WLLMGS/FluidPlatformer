@@ -62,14 +62,7 @@ public class GameplayManager : MonoBehaviour
     public void NotifyLevelFinish()
     {
         int currentIndex = SceneManager.GetActiveScene().buildIndex;
-        try
-        {
-            SceneManager.LoadScene(currentIndex + 1);
-        }
-        catch (Exception e)
-        {
-            Debug.Log("AT THE END OF SCENES");
-        }
+        SceneManager.LoadScene(currentIndex + 1);
     }
 
     private void HandleRespawning()

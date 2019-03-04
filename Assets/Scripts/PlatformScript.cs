@@ -21,8 +21,8 @@ public class PlatformScript : MonoBehaviour {
 
     private void HandleDroppingDown()
     {
-        if(_isColliding
-            && (Input.GetKey(KeyCode.S)
+        if (_isColliding
+            && (Input.GetKeyDown(KeyCode.S)
             || Input.GetAxis("Vertical") < -0.5f))
         {
             _effector.rotationalOffset = 180.0f;
