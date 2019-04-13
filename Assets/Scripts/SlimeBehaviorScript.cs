@@ -8,23 +8,26 @@ public class SlimeBehaviorScript : MonoBehaviour
 
     [SerializeField] private GameObject _deathParticle;
     private Rigidbody2D _rigid;
+    private SpriteRenderer _renderer;
     private bool _IsDangerous = true;
 
     private SelectorNode _rootNode;
 
     private float _movespeed = 2.5f;
-    private bool _isGoingRight = true;
+    private bool _isGoingRight = false;
     private LayerMask _mask = 1 << 9;
     private float _lookDistance = 0.85f;
 
     public bool IsDangerous
     {
         get { return _IsDangerous; }
+        set { _IsDangerous = value; }
     }
 
     private void Start()
     {
         _rigid = GetComponent<Rigidbody2D>();
+        _renderer = GetComponent<SpriteRenderer>();
 
         _rootNode = new SelectorNode(
 
@@ -81,6 +84,7 @@ public class SlimeBehaviorScript : MonoBehaviour
         if (hit)
         {
             _isGoingRight = false;
+            _renderer.flipX = false;
             return NodeState.Continue;
         }
         return NodeState.Failure;
@@ -92,6 +96,7 @@ public class SlimeBehaviorScript : MonoBehaviour
         if (hit)
         {
             _isGoingRight = true;
+            _renderer.flipX = true;
             return NodeState.Continue;
         }
         return NodeState.Failure;
@@ -104,6 +109,7 @@ public class SlimeBehaviorScript : MonoBehaviour
         if (!hit)
         {
             _isGoingRight = false;
+            _renderer.flipX = false;
             return NodeState.Continue;
         }
         return NodeState.Failure;
@@ -115,6 +121,7 @@ public class SlimeBehaviorScript : MonoBehaviour
         if (!hit)
         {
             _isGoingRight = true;
+            _renderer.flipX = true;
             return NodeState.Continue;
         }
         return NodeState.Failure;

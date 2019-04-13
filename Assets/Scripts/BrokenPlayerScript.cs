@@ -14,5 +14,6 @@ public class BrokenPlayerScript : MonoBehaviour {
         float y = Random.Range(-_range, _range);
         Vector2 force = new Vector2(x, y);
         _rigid.AddForce(force, ForceMode2D.Impulse);
+        
     }
 }

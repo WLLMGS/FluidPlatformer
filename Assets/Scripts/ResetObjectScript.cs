@@ -27,5 +27,9 @@ public class ResetObjectScript : MonoBehaviour {
         transform.position = _startPos;
         //reactivate colliders
         foreach (var collider in _colliders) collider.enabled = true;
+
+        //get slime comp
+        var slimecomp = GetComponent<SlimeBehaviorScript>();
+        if (slimecomp) slimecomp.IsDangerous = true;
     }
 }

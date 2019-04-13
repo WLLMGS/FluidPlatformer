@@ -61,6 +61,7 @@ public class ControllerNavigationComponent : MonoBehaviour {
         {
             var currPos = _cam.transform.position;
             var targetPos = transform.position;
+
             targetPos.z = _orgCamZ;
 
             _cam.transform.position = Vector3.MoveTowards(currPos, targetPos, _camMovespeed * Time.deltaTime);

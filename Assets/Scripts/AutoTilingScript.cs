@@ -35,6 +35,8 @@ public class AutoTilingScript : MonoBehaviour
     private LayerMask _mask;
     void Start()
     {
+        //Physics2D.IgnoreLayerCollision(0, 1);
+
         _renderer = GetComponent<SpriteRenderer>();
         _mask = 1 << 9;
 
@@ -56,6 +58,8 @@ public class AutoTilingScript : MonoBehaviour
         bool hitRight = CheckRaycastHit(RaycastHitRight);
         bool hitDown = CheckRaycastHit(RaycastHitDown);
         bool hitLeft = CheckRaycastHit(RaycastHitLeft);
+
+
 
         //top left
         if (!hitUp
@@ -156,6 +160,7 @@ public class AutoTilingScript : MonoBehaviour
             _renderer.sprite = _BottomMiddle;
             _ID = BlockType.BOTTOM_MIDDLE;
         }
+        
     }
 
     private void UpdateSurroundings()

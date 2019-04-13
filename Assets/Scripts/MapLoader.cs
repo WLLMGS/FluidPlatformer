@@ -106,8 +106,9 @@ public class MapLoader : MonoBehaviour
                     resetComp = null;
                     break;
                 case EntityID.DarkBackground:
-                    var background = Instantiate(_background, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
-                    background.transform.parent = parentObj;
+                    //var background = Instantiate(_background, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
+                    //background.transform.parent = parentObj;
+                    StartCoroutine(SpawnBackground(pos, angle, parentObj));
                     break;
                 case EntityID.WeakBlock:
                     var weakBlock = Instantiate(_weakBlock, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
@@ -131,6 +132,14 @@ public class MapLoader : MonoBehaviour
         reader.Close();
 
         return resetableObjects;
+    }
+
+    private IEnumerator SpawnBackground(Vector3 pos, float angle, Transform parent)
+    {
+        yield return new WaitForSeconds(0.1f);
+        Debug.Log("spawn background");
+        var background = Instantiate(_background, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
+        background.transform.parent = parent;
     }
 
 }

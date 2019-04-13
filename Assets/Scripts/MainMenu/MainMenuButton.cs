@@ -22,7 +22,7 @@ public class MainMenuButton : MonoBehaviour {
     private void HandleControls()
     {
         if(_isActive
-            && Input.GetKeyDown(KeyCode.Return))
+            && Input.GetButtonDown("Jump"))
         {
             DoAction();
         }
