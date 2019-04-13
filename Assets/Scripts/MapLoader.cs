@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MapLoader : MonoBehaviour
 {
+
+    [SerializeField] private bool _isEditor = false;
     [SerializeField] private GameObject _block;
     [SerializeField] private GameObject _beginFlag;
     [SerializeField] private GameObject _finishFlag;
@@ -106,9 +108,12 @@ public class MapLoader : MonoBehaviour
                     resetComp = null;
                     break;
                 case EntityID.DarkBackground:
-                    //var background = Instantiate(_background, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
-                    //background.transform.parent = parentObj;
-                    StartCoroutine(SpawnBackground(pos, angle, parentObj));
+                    if(_isEditor) StartCoroutine(SpawnBackground(pos, angle, parentObj));
+                    else
+                    { 
+                      var background = Instantiate(_background, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
+                      background.transform.parent = parentObj;
+                    }
                     break;
                 case EntityID.WeakBlock:
                     var weakBlock = Instantiate(_weakBlock, pos, Quaternion.Euler(new Vector3(0, 0, angle)));
