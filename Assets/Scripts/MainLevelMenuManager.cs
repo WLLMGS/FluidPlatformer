@@ -53,7 +53,7 @@ public class MainLevelMenuManager : MonoBehaviour {
         SceneManager.LoadScene("Editor");
     }
 
-    public void MainGameButton()
+    public void LevelSelectButton()
     {
         UnPause();
         SceneManager.LoadScene("LevelSelectionScene");
@@ -61,6 +61,12 @@ public class MainLevelMenuManager : MonoBehaviour {
     public void QuitButton()
     {
         Application.Quit();
+    }
+
+    public void MainMenuButton()
+    {
+        UnPause();
+        SceneManager.LoadScene("NewMainMenu");
     }
 
     private IEnumerator SelectFirstButton()

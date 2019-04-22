@@ -6,7 +6,7 @@ using UnityEngine.Assertions.Must;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    private static bool _CanMove = false;
+    private static bool _CanMove = true;
 
     public static bool CanMove
     {

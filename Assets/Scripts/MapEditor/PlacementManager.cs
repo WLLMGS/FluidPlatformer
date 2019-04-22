@@ -9,7 +9,6 @@ public enum PlacementMode
     Delete
 }
 
-
 public class PlacementManager : MonoBehaviour
 {
     //===== SINGLETON =====
@@ -45,8 +44,6 @@ public class PlacementManager : MonoBehaviour
     private bool _IsHoveringOverButton = false;
     private int _BrushSize = 1;
     private int _selectedID = 0;
-
-
 
     private void Start()
     {
